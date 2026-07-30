@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOKARTE — Portal Espiritual & Acolhimento</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kokarteBg: '#0f2017',
+                        kokarteCard: '#1d382b',
+                        kokarteGold: '#D4AF37',
+                        kokarteGoldHover: '#E5C158',
+                        kokarteText: '#E8F1EC'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- AOS Library (Scrolltelling Animation) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* Animação Suave Flutuante e Brilho para o Logótipo */
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.2));
+            }
+            50% {
+                transform: translateY(-5px) scale(1.02);
+                filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.35));
+            }
+        }
+
+        .logo-premium-anim {
+            animation: logoFloat 6s ease-in-out infinite;
+        }
+
+        /* LINHA DOURADA ANIMADA DO HEADER */
+        @keyframes goldMove {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .gold-header-line {
+            height: 2px;
+            width: 100%;
+            border: 0;
+            background: linear-gradient(
+                90deg, 
+                transparent 0%, 
+                rgba(212, 175, 55, 0.2) 15%, 
+                rgba(212, 175, 55, 0.8) 50%, 
+                rgba(212, 175, 55, 0.2) 85%, 
+                transparent 100%
+            );
+            background-size: 200% 100%;
+            animation: goldMove 4s linear infinite;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .gold-header-line:hover {
+            box-shadow: 0 0 16px rgba(212, 175, 55, 0.7);
+            filter: brightness(1.3);
+            height: 3px;
+        }
+
+        .glow-gold {
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        .glass-card {
+            backdrop-filter: blur(14px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-kokarteBg text-kokarteText font-sans min-h-screen pb-12 overflow-x-hidden relative">
+
+    <!-- CONTENTOR FIXO PARA O EFEITO DE NÉVOA VERDE PROFUNDA (VANTA.JS) -->
+    <div id="vanta-bg" class="fixed inset-0 z-0 pointer-events-none"></div>
+
+    <!-- Conteúdo principal envolvido para se manter por cima do fundo -->
+    <div class="relative z-10">
+
+        <!-- Cabeçalho Otimizado com Redes Sociais -->
+        <header class="text-center pt-6 pb-0 overflow-hidden relative">
+            <!-- Logótipo Compacto -->
+            <div class="flex justify-center mb-3 px-4" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="logo.jpeg" alt="Logótipo Kokarte" class="logo-premium-anim h-28 sm:h-36 w-auto object-contain">
+            </div>
+
+            <!-- Barra de Redes Sociais -->
+            <div class="flex justify-center items-center gap-3.5 my-3 px-4" data-aos="fade-down" data-aos-delay="150">
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" title="Instagram" class="w-9 h-9 rounded-full bg-kokarteCard/90 border border-kokarteGold/40 flex items-center justify-center text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg transition-all duration-300 hover:scale-110 shadow-md">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook" class="w-9 h-9 rounded-full bg-kokarteCard/90 border border-kokarteGold/40 flex items-center justify-center text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg transition-all duration-300 hover:scale-110 shadow-md">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://linktr.ee/" target="_blank" rel="noopener noreferrer" title="Linktree" class="w-9 h-9 rounded-full bg-kokarteCard/90 border border-kokarteGold/40 flex items-center justify-center text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg transition-all duration-300 hover:scale-110 shadow-md">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M13.511 5.853l3.962-3.962 1.872 1.872-3.962 3.962h5.617v2.648h-5.617l3.962 3.962-1.872 1.872-4.836-4.836v7.629h-2.648V11.38l-4.836 4.836-1.872-1.872 3.962-3.962H3.585V7.735h5.617L5.24 3.773l1.872-1.872 3.962 3.962V0h2.437v5.853zm-2.437 12.294h2.437V24h-2.437v-5.853z"/></svg>
+                </a>
+            </div>
+
+            <!-- Subtítulo Animado Aumentado para Melhor Leitura -->
+            <div class="max-w-xl mx-auto space-y-1.5 px-4 mb-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <p class="text-sm sm:text-base font-medium text-kokarteGold tracking-wide leading-snug">
+                    Um espaço dedicado à harmonia, espiritualidade e bem-estar.
+                </p>
+                <p class="text-xs sm:text-sm text-emerald-100/80 tracking-wider leading-relaxed">
+                    Produtos esotéricos e naturais para transformar a sua energia e trazer paz ao seu dia a dia.
+                </p>
+            </div>
+
+            <!-- LINHA DOURADA ANIMADA COLADA NA BASE DO HEADER -->
+            <div class="gold-header-line cursor-pointer mt-4" data-aos="fade-up"></div>
+        </header>
+
+        <main class="max-w-md mx-auto px-4 space-y-6 mt-6">
+
+            <!-- SECÇÃO 1: O ORÁCULO -->
+            <section class="bg-kokarteCard/90 rounded-2xl p-6 glow-gold text-center relative overflow-hidden glass-card" data-aos="fade-up" data-aos-duration="900">
+                <span class="text-xs sm:text-sm uppercase tracking-widest text-kokarteGold font-bold">O Teu Conselho do Dia</span>
+                <p id="oraculo-texto" class="text-base sm:text-lg my-4 italic font-light leading-relaxed text-emerald-50 transition-opacity duration-500">
+                    "A carregar a tua mensagem especial..."
+                </p>
+                <button onclick="tirarNovaMensagem()" class="mt-1 bg-kokarteGold hover:bg-kokarteGoldHover text-kokarteBg font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-kokarteGold/30 hover:scale-105 active:scale-95">
+                    ✨ Tirar Nova Mensagem
+                </button>
+            </section>
+
+            <!-- SECÇÃO 2: ENERGIA DO MÊS -->
+            <section class="bg-kokarteCard/85 border border-kokarteGold/30 rounded-2xl p-6 space-y-4 glass-card" data-aos="fade-right" data-aos-duration="900">
+                <div class="border-b border-kokarteGold/20 pb-2.5">
+                    <span class="text-xs sm:text-sm text-kokarteGold uppercase tracking-wider font-bold">Energia do Mês</span>
+                    <h2 id="energia-mes-titulo" class="text-lg sm:text-xl font-bold text-white mt-1">---</h2>
+                </div>
+                
+                <div class="space-y-2.5 text-sm sm:text-base text-emerald-100/90 leading-relaxed">
+                    <p>💎 <strong>Cristal Guia:</strong> <span id="energia-cristal" class="text-kokarteGold font-semibold">---</span></p>
+                    <p>✨ <strong>Benefícios:</strong> <span id="energia-beneficios">---</span></p>
+                    <p>⚠️ <strong>Cuidados & Atenção:</strong> <span id="energia-cuidados">---</span></p>
+                    <div class="bg-kokarteBg/80 p-3.5 rounded-xl border-l-2 border-kokarteGold mt-4">
+                        <p class="text-xs sm:text-sm italic text-emerald-200">" <span id="energia-afirmacao">---</span> "</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECÇÃO 3: NOVO CONCEITO & LOJA ONLINE -->
+            <section class="bg-gradient-to-br from-kokarteCard/95 to-[#13291e]/95 border border-kokarteGold/40 rounded-2xl p-6 shadow-xl relative overflow-hidden glass-card" data-aos="fade-up" data-aos-duration="1000">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-kokarteGold/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="text-center space-y-3 relative z-10">
+                    <span class="text-xs uppercase tracking-widest bg-kokarteGold/20 text-kokarteGold border border-kokarteGold/40 font-bold px-3.5 py-1 rounded-full inline-block">
+                        🛍️ Catálogo Oficial
+                    </span>
+                    
+                    <h2 class="text-xl font-bold text-white tracking-wide">
+                        Explore a Nossa Loja Online
+                    </h2>
+                    
+                    <p class="text-xs sm:text-sm text-emerald-100/85 leading-relaxed max-w-sm mx-auto">
+                        Descubra a nossa coleção completa de cristais, incensos, velas artesanais e amuletos programados. Leve a energia da KOKARTE até à sua casa.
+                    </p>
+
+                    <div class="pt-2">
+                        <a href="https://kokarte.kyte.site/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-kokarteGold hover:bg-kokarteGoldHover text-kokarteBg font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-kokarteGold/30 hover:scale-105 active:scale-95">
+                            <span>✨ Visitar Loja & Fazer Pedido</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECÇÃO 4: SERVIÇOS FIXOS (CORRIGIDA E CENTRALIZADA) -->
+            <section class="space-y-4">
+                <h2 class="text-center text-xs sm:text-sm uppercase tracking-widest text-kokarteGold font-bold" data-aos="fade-up">Nossos Serviços Recorrentes</h2>
+                
+                <!-- Serviço 1 -->
+                <div class="bg-kokarteCard/90 p-6 rounded-2xl border border-emerald-800/50 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4 glass-card" data-aos="fade-left" data-aos-delay="100">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-white text-base sm:text-lg">Consulta de Leitura de Cristais</h3>
+                        <p class="text-xs sm:text-sm text-emerald-200/80 leading-relaxed">Alinhamento de chakras e diagnóstico vibracional.</p>
+                    </div>
+                    <a href="#" onclick="agendarWhatsApp('Consulta de Leitura de Cristais')" class="w-full sm:w-auto text-center bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shrink-0 shadow-sm hover:scale-105">
+                        Reservar
+                    </a>
+                </div>
+
+                <!-- Serviço 2 -->
+                <div class="bg-kokarteCard/90 p-6 rounded-2xl border border-emerald-800/50 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4 glass-card" data-aos="fade-right" data-aos-delay="200">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-white text-base sm:text-lg">Acompanhamento Energético</h3>
+                        <p class="text-xs sm:text-sm text-emerald-200/80 leading-relaxed">Sessão individual de harmonização pessoal.</p>
+                    </div>
+                    <a href="#" onclick="agendarWhatsApp('Acompanhamento Energético')" class="w-full sm:w-auto text-center bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shrink-0 shadow-sm hover:scale-105">
+                        Reservar
+                    </a>
+                </div>
+
+                <!-- Serviço 3 -->
+                <div class="bg-kokarteCard/90 p-6 rounded-2xl border border-emerald-800/50 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-4 glass-card" data-aos="fade-left" data-aos-delay="300">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-white text-base sm:text-lg">Criação de Amuleto Personalizado</h3>
+                        <p class="text-xs sm:text-sm text-emerald-200/80 leading-relaxed">Peça programada com a tua energia e intenção.</p>
+                    </div>
+                    <a href="#" onclick="agendarWhatsApp('Criação de Amuleto Personalizado')" class="w-full sm:w-auto text-center bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shrink-0 shadow-sm hover:scale-105">
+                        Reservar
+                    </a>
+                </div>
+            </section>
+            <!-- SECÇÃO 5: PRÓXIMOS EVENTOS -->
+            <section class="space-y-3.5" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-center text-xs sm:text-sm uppercase tracking-widest text-kokarteGold font-bold">Próximos Eventos & Workshops</h2>
+                <div id="lista-eventos" class="space-y-3.5">
+                    <!-- Os eventos gerados pelo Admin vão aparecer aqui dinamicamente -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="text-center text-xs sm:text-sm text-emerald-200/70 mt-14 mb-4 space-y-4" data-aos="fade-up">
+            <div>
+                <a href="admin.html" class="inline-flex items-center gap-2 bg-kokarteCard hover:bg-kokarteCard/80 border border-kokarteGold/40 text-kokarteGold hover:text-kokarteGoldHover font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full transition-all duration-300 shadow-md hover:border-kokarteGold hover:scale-105">
+                    <span>⚙️</span> Painel Administrativo
+                </a>
+            </div>
+            <p>© KOKARTE — Todos os direitos reservados</p>
+        </footer>
+
+    </div>
+
+    <!-- LIBRARIES: THREE.JS + VANTA.FOG.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+
+    <!-- INICIALIZAÇÃO DO VANTA FOG COM A PALETA VERDE-PROFUNDA KOKARTE -->
+    <script>
+        VANTA.FOG({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            highlightColor: 0x2d523e, // Verde esmeralda suave / musgo
+            midtoneColor: 0x1a3829,   // Verde floresta profundo
+            lowlightColor: 0x0f2117,  // Verde escuro místico
+            baseColor: 0x07110c,      // Fundo noturno suave
+            blurFactor: 0.75,         // Maior suavidade na névoa
+            speed: 0.80,              // Movimento calmo e relaxante
+            zoom: 0.90
+        });
+    </script>
+
+    <!-- Scripts do Projeto -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Inicialização das Animações AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+    </script>
+</body>
+</html>

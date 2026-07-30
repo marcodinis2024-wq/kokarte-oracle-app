@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOKARTE — Painel de Administração</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kokarteBg: '#12241A',
+                        kokarteCard: '#244232',
+                        kokarteGold: '#D4AF37',
+                        kokarteGoldHover: '#E5C158',
+                        kokarteText: '#E2ECE6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-kokarteBg text-kokarteText font-sans min-h-screen p-4 md:p-8">
+
+    <!-- ECRÃ DE LOGIN -->
+    <div id="sec-login" class="max-w-md mx-auto mt-16 bg-kokarteCard p-8 rounded-2xl border border-kokarteGold/40 shadow-2xl">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-kokarteGold tracking-widest">KOKARTE</h1>
+            <p class="text-xs text-emerald-200/70 mt-1">Área Restrita de Gestão</p>
+        </div>
+        <form onsubmit="fazerLogin(event)" class="space-y-4">
+            <div>
+                <label class="block text-xs uppercase font-semibold text-kokarteGold mb-1">Palavra-passe de Acesso</label>
+                <input type="password" id="input-senha" required placeholder="Digite a palavra-passe..." class="w-full bg-kokarteBg border border-emerald-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-kokarteGold">
+            </div>
+            <button type="submit" class="w-full bg-kokarteGold hover:bg-kokarteGoldHover text-kokarteBg font-bold py-3 rounded-lg text-sm transition-colors">
+                Entrar no Painel
+            </button>
+        </form>
+    </div>
+
+    <!-- PAINEL ADMINISTRATIVO (Invisível até fazer login) -->
+    <div id="painel-admin" class="max-w-4xl mx-auto space-y-8 hidden">
+        
+        <!-- Topo do Painel -->
+        <header class="flex justify-between items-center border-b border-kokarteGold/30 pb-4">
+            <div>
+                <h1 class="text-xl font-bold text-kokarteGold">Painel de Eventos KOKARTE</h1>
+                <p class="text-xs text-emerald-200/70">Gere os workshops e eventos visíveis no portal do cliente</p>
+            </div>
+            <button onclick="fazerLogout()" class="text-xs border border-red-400/40 text-red-300 hover:bg-red-950/40 px-3 py-1.5 rounded-lg transition-colors">
+                Sair
+            </button>
+        </header>
+
+        <!-- Formulário de Criar/Editar Evento -->
+        <section class="bg-kokarteCard p-6 rounded-2xl border border-emerald-800/60 shadow-lg">
+            <h2 id="form-titulo" class="text-sm font-bold uppercase tracking-wider text-kokarteGold mb-4">✨ Adicionar Novo Evento</h2>
+            
+            <form id="form-evento" onsubmit="guardarEvento(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="hidden" id="evento-id">
+                
+                <div class="md:col-span-2">
+                    <label class="block text-xs text-emerald-200/80 mb-1">Título do Evento / Workshop</label>
+                    <input type="text" id="evento-titulo" required placeholder="Ex: Workshop de Cristais de Proteção" class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-emerald-200/80 mb-1">Data e Hora</label>
+                    <input type="text" id="evento-data" required placeholder="Ex: 15 de Setembro, 18:30" class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-emerald-200/80 mb-1">Local</label>
+                    <input type="text" id="evento-local" required placeholder="Ex: Loja KOKARTE / Online" class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-xs text-emerald-200/80 mb-1">Descrição Breve</label>
+                    <textarea id="evento-descricao" rows="2" placeholder="Pequena explicação sobre o evento..." class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold"></textarea>
+                </div>
+
+                <!-- 📷 NOVO CAMPO: UPLOAD DE IMAGEM DA GALERIA DO TELEMÓVEL -->
+                <div class="md:col-span-2">
+                    <label class="block text-xs text-emerald-200/80 mb-1">Imagem do Evento (Opcional - Escolher do Telemóvel)</label>
+                    <input type="file" id="evento-imagem" accept="image/*" class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2 text-xs text-emerald-100 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-kokarteGold file:text-kokarteBg hover:file:bg-kokarteGoldHover cursor-pointer">
+                    <!-- Campo escondido para guardar o Base64 da imagem existente ao editar -->
+                    <input type="hidden" id="evento-imagem-base64">
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="evento-ativo" checked class="w-4 h-4 accent-kokarteGold rounded">
+                    <label for="evento-ativo" class="text-xs text-emerald-200">Visível no Website (Ativo)</label>
+                </div>
+
+                <div class="md:col-span-2 flex space-x-3 pt-2">
+                    <button type="submit" class="flex-1 bg-kokarteGold hover:bg-kokarteGoldHover text-kokarteBg font-bold py-2.5 rounded-lg text-xs uppercase tracking-wider transition-colors">
+                        Guardar Evento
+                    </button>
+                    <button type="button" onclick="limparFormulario()" class="bg-kokarteBg border border-emerald-800 text-emerald-300 px-4 py-2.5 rounded-lg text-xs hover:bg-emerald-950 transition-colors">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Lista de Eventos Cadastrados -->
+        <section class="space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-kokarteGold">Lista de Eventos Atuais</h2>
+            <div id="tabela-eventos" class="space-y-3">
+                <!-- Inserido dinamicamente pelo JavaScript -->
+            </div>
+        </section>
+
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
