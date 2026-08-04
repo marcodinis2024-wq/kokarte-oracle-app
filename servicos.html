@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços KOKARTE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kokarteBg: '#0f2017',
+                        kokarteCard: '#1d382b',
+                        kokarteGold: '#D4AF37',
+                        kokarteGoldHover: '#E5C158',
+                        kokarteText: '#E8F1EC'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(29, 56, 43, 0.9);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover { border-color: rgba(212, 175, 55, 0.6); }
+        
+        .text-collapsed {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .text-expanded {
+            display: block;
+        }
+    
+        #vanta-bg{
+            position:fixed;
+            inset:0;
+            z-index:0;
+        }
+</style>
+</head>
+<body class="text-kokarteText min-h-screen font-sans overflow-x-hidden">
+    
+    <div id="vanta-bg" class="fixed inset-0 z-0 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-md mx-auto p-6 space-y-8">
+        
+        <header class="pt-6">
+            <a href="index.html" class="inline-flex items-center gap-2 text-kokarteGold hover:text-white transition-colors text-sm mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                Voltar ao Portal
+            </a>
+            <h1 class="text-3xl font-bold text-kokarteGold">Nossos Serviços</h1>
+            <p class="text-emerald-100/70 text-sm mt-2">Escolha o atendimento que melhor ressoa com o seu momento.</p>
+        </header>
+
+        <div class="space-y-6">
+            
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-white mb-4">Consulta de Mapeamento Energético</h3>
+                
+                <!-- Destaques -->
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Duração</p>
+                        <p class="text-sm font-semibold text-white">60 minutos</p>
+                    </div>
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Valor</p>
+                        <p class="text-sm font-semibold text-white">45.000 Kz</p>
+                    </div>
+                </div>
+
+                <p id="desc-1" class="text-emerald-50 text-sm leading-relaxed mb-2 text-collapsed transition-all duration-300">
+                    A Consulta de Mapeamento Energético é o primeiro passo para compreender o seu estado energético e identificar os bloqueios que podem estar a influenciar diferentes áreas da sua vida.
+                    <br><br>
+                    Integra uma leitura do perfil energético, emocional, numerológico e kármico, com o objetivo de identificar padrões, bloqueios e desafios, compreender o momento atual de vida e trazer maior clareza sobre o propósito de vida.
+                    <br><br>
+                    Esta análise cruza essas informações com uma avaliação energética realizada através da radiestesia. A consulta pode ser complementada com a Limpeza e Harmonização Energética para um trabalho mais profundo.
+                </p>
+                <button onclick="toggleText(this, 'desc-1')" class="text-kokarteGold text-xs font-bold underline mb-4">Ver mais</button>
+                <button onclick="agendarWhatsApp('Consulta de Mapeamento Energético')" class="w-full bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg py-3 rounded-xl transition-all font-semibold">
+                    Agendar Consulta
+                </button>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-white mb-4">Reiki Tibetano</h3>
+                
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Duração</p>
+                        <p class="text-sm font-semibold text-white">60 min</p>
+                    </div>
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Valor</p>
+                        <p class="text-sm font-semibold text-white">59.000 Kz</p>
+                    </div>
+                </div>
+
+                <p id="desc-2" class="text-emerald-50 text-sm leading-relaxed mb-2 text-collapsed transition-all duration-300">
+                    O Reiki Tibetano é uma terapia energética que promove o equilíbrio do campo energético, favorecendo o relaxamento profundo, a libertação de tensões e o restabelecimento da harmonia entre corpo, mente e emoções.
+                    <br><br>
+                    Cada sessão é adaptada às necessidades e ao momento de vida de cada pessoa, permitindo um trabalho personalizado de reequilíbrio energético, bem-estar e desenvolvimento pessoal.
+                    <br><br>
+                    Oferecemos duas modalidades: Sessão Completa (indicada para quem inicia o processo) e Sessão de Manutenção (para acompanhamento regular).
+                </p>
+                <button onclick="toggleText(this, 'desc-2')" class="text-kokarteGold text-xs font-bold underline mb-4">Ver mais</button>
+                <button onclick="agendarWhatsApp('Reiki Tibetano')" class="w-full bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg py-3 rounded-xl transition-all font-semibold">
+                    Agendar Sessão
+                </button>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-white mb-4">Programa de Transformação Pessoal</h3>
+                
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Duração</p>
+                        <p class="text-sm font-semibold text-white">60-90 min/sessão</p>
+                    </div>
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Investimento</p>
+                        <p class="text-sm font-semibold text-white">150.000 Kz (pack de 3 sessões)</p>
+                    </div>
+                </div>
+
+                <p id="desc-3" class="text-emerald-50 text-sm leading-relaxed mb-2 text-collapsed transition-all duration-300">
+                    O Programa de Transformação Pessoal é um acompanhamento individual e personalizado, criado para quem pretende transformar padrões repetitivos, crenças limitantes e bloqueios identificados.
+                    <br><br>
+                    O programa inicia-se com um pack de 3 sessões, onde trabalhamos reprogramação mental, gestão emocional, inteligência emocional e definição de metas. É um processo focado na mudança consistente e sustentável para uma vida com mais propósito.
+                </p>
+                <button onclick="toggleText(this, 'desc-3')" class="text-kokarteGold text-xs font-bold underline mb-4">Ver mais</button>
+                <button onclick="agendarWhatsApp('Programa de Transformação Pessoal')" class="w-full bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg py-3 rounded-xl transition-all font-semibold">
+                    Saber Mais
+                </button>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-white mb-4">Massagem Bioenergética com Cristais</h3>
+                
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Duração</p>
+                        <p class="text-sm font-semibold text-white">60 min</p>
+                    </div>
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Valor</p>
+                        <p class="text-sm font-semibold text-white">38.000 Kz</p>
+                    </div>
+                </div>
+
+                <p id="desc-4" class="text-emerald-50 text-sm leading-relaxed mb-2 text-collapsed transition-all duration-300">
+                    A Massagem Bioenergética combina técnicas de massagem terapêutica com trabalho energético e cristais, proporcionando um profundo estado de relaxamento e reequilíbrio da energia vital.
+                    <br><br>
+                    Cada sessão integra aromaterapia e a aplicação personalizada de cristais, restaurando o fluxo energético e favorecendo uma sensação imediata de leveza, tranquilidade e renovação profunda.
+                </p>
+                <button onclick="toggleText(this, 'desc-4')" class="text-kokarteGold text-xs font-bold underline mb-4">Ver mais</button>
+                <button onclick="agendarWhatsApp('Massagem Bioenergética')" class="w-full bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg py-3 rounded-xl transition-all font-semibold">
+                    Agendar Massagem
+                </button>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-xl font-bold text-white mb-4">RESET by KOKARTE</h3>
+                
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Formato</p>
+                        <p class="text-sm font-semibold text-white">Individual/Grupo</p>
+                    </div>
+                    <div class="bg-kokarteGold/10 border border-kokarteGold/30 rounded-lg p-2 text-center">
+                        <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider">Investimento</p>
+                        <p class="text-sm font-semibold text-white">8.500 Kz</p>
+                    </div>
+                </div>
+
+                <p id="desc-5" class="text-emerald-50 text-sm leading-relaxed mb-2 text-collapsed transition-all duration-300">
+                    O RESET by KOKARTE é uma experiência de reconexão consigo mesmo, criada para desacelerar, libertar a tensão acumulada e restaurar o equilíbrio.
+                    <br><br>
+                    Sessão focada em respiração, meditação guiada, visualização e alongamentos suaves. Um momento de pausa consciente para renovação interior.
+                </p>
+                <button onclick="toggleText(this, 'desc-5')" class="text-kokarteGold text-xs font-bold underline mb-4">Ver mais</button>
+                <button onclick="agendarWhatsApp('RESET by KOKARTE')" class="w-full bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg py-3 rounded-xl transition-all font-semibold">
+                    Saber Mais
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const NUMERO_WHATSAPP = "244936676628";
+        
+        function agendarWhatsApp(nomeItem) {
+            const mensagem = `Olá! Gostaria de saber mais sobre: *${nomeItem}*.`;
+            const urlWhatsApp = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
+            window.open(urlWhatsApp, "_blank");
+        }
+
+        function toggleText(btn, elementId) {
+            const p = document.getElementById(elementId);
+            const isCollapsed = p.classList.contains('text-collapsed');
+            
+            if (isCollapsed) {
+                p.classList.remove('text-collapsed');
+                p.classList.add('text-expanded');
+                btn.innerText = 'Ver menos';
+            } else {
+                p.classList.remove('text-expanded');
+                p.classList.add('text-collapsed');
+                btn.innerText = 'Ver mais';
+            }
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <script>
+        VANTA.FOG({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            highlightColor: 0x2d523e,
+            midtoneColor: 0x1a3829,
+            lowlightColor: 0x0f2117,
+            baseColor: 0x07110c,
+            blurFactor: 0.75,
+            speed: 0.80,
+            zoom: 0.90
+        });
+    </script>
+
+</body>
+</html>

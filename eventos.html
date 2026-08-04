@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos KOKARTE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kokarteBg: '#0f2017',
+                        kokarteCard: '#1d382b',
+                        kokarteGold: '#D4AF37',
+                        kokarteGoldHover: '#E5C158',
+                        kokarteText: '#E8F1EC'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(29, 56, 43, 0.9);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-kokarteBg text-kokarteText min-h-screen font-sans">
+
+    <div id="vanta-bg" class="fixed inset-0 z-0 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-md mx-auto p-6 space-y-8">
+        <header class="pt-6">
+            <a href="index.html" class="inline-flex items-center gap-2 text-kokarteGold hover:text-white transition-colors text-sm mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                Voltar ao Portal
+            </a>
+            <h1 class="text-3xl font-bold text-kokarteGold">Eventos & Workshops</h1>
+            <p class="text-emerald-100/70 text-sm mt-2">Participe nas nossas experiências presenciais.</p>
+        </header>
+
+        <div id="lista-eventos-detalhada" class="space-y-6">
+            <!-- Os eventos serão carregados aqui -->
+            <div class="text-center p-10">
+                <p class="text-kokarteGold animate-pulse">A carregar eventos...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <script>
+        VANTA.FOG({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            highlightColor: 0x2d523e,
+            midtoneColor: 0x1a3829,
+            lowlightColor: 0x0f2117,
+            baseColor: 0x07110c,
+            blurFactor: 0.75,
+            speed: 0.80,
+            zoom: 0.90
+        });
+    </script>
+    <script>
+        const NUMERO_WHATSAPP = "244936676628";
+
+        function carregarEventos() {
+            const container = document.getElementById("lista-eventos-detalhada");
+            let eventos = [];
+
+            try {
+                const dados = localStorage.getItem("kokarte_eventos");
+                eventos = dados ? JSON.parse(dados) : [];
+            } catch (e) {
+                console.error("Erro ao ler eventos:", e);
+            }
+
+            const ativos = eventos.filter(evt => evt.ativo);
+
+            if (ativos.length === 0) {
+                container.innerHTML = `
+                    <div class="glass-card p-8 rounded-2xl text-center border border-emerald-800/40">
+                        <p class="text-emerald-200/70">Não existem eventos agendados de momento. Fique atenta às nossas redes sociais!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = "";
+            ativos.forEach(evt => {
+                // Lê a descrição completa, se não existir faz fallback para a breve ou normal
+                const textoCompleto = evt.descricaoCompleta || evt.descricaoBreve || evt.descricao || "";
+                
+                container.innerHTML += `
+                    <div class="glass-card rounded-2xl overflow-hidden border border-emerald-800/50">
+                        ${evt.imagem ? `<img src="${evt.imagem}" class="w-full h-48 object-cover opacity-90">` : ''}
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${evt.titulo}</h3>
+                            <p class="text-xs text-kokarteGold font-semibold mb-4 uppercase tracking-wider">📅 ${evt.data} | 📍 ${evt.local}</p>
+                            <p class="text-emerald-50 text-sm leading-relaxed mb-6 whitespace-pre-line">${textoCompleto}</p>
+                            <button onclick="agendarWhatsApp('Evento: ${evt.titulo}')" class="w-full bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg py-3 rounded-xl transition-all font-semibold">
+                                Garantir vaga no evento
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function agendarWhatsApp(nomeItem) {
+            const mensagem = `Olá! Gostaria de reservar lugar para: *${nomeItem}*.`;
+            const urlWhatsApp = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
+            window.open(urlWhatsApp, "_blank");
+        }
+
+        document.addEventListener("DOMContentLoaded", carregarEventos);
+    </script>
+</body>
+</html>

@@ -54,19 +54,25 @@ function carregarEventosIniciais() {
     const container = document.getElementById("lista-eventos");
     if (!container) return;
     
-    // Procura os eventos guardados no LocalStorage
-    const dadosLocais = localStorage.getItem("kokarte_eventos");
-    const eventos = dadosLocais ? JSON.parse(dadosLocais) : [
-        {
-            id: 1,
-            titulo: "Workshop de Cristais de Proteção",
-            data: "15 de Setembro, 18:30",
-            local: "Loja KOKARTE",
-            descricao: "Aprende a limpar e programar as tuas pedras.",
-            ativo: true,
-            imagem: ""
-        }
-    ];
+    // Procura os eventos guardados no LocalStorage com proteção contra erros
+    let eventos = [];
+    try {
+        const dadosLocais = localStorage.getItem("kokarte_eventos");
+        eventos = dadosLocais ? JSON.parse(dadosLocais) : [
+            {
+                id: 1,
+                titulo: "Workshop de Cristais de Proteção",
+                data: "15 de Setembro, 18:30",
+                local: "Loja KOKARTE",
+                descricao: "Aprende a limpar e programar as tuas pedras.",
+                ativo: true,
+                imagem: ""
+            }
+        ];
+    } catch (e) {
+        console.error("Erro ao ler eventos do LocalStorage:", e);
+        eventos = [];
+    }
 
     const eventosAtivos = eventos.filter(evt => evt.ativo);
 
@@ -81,6 +87,9 @@ function carregarEventosIniciais() {
 
     container.innerHTML = "";
     eventosAtivos.forEach(evt => {
+        // Garantir compatibilidade com eventos antigos que só tinham "descricao"
+        const textoBreve = evt.descricaoBreve || evt.descricao || "";
+
         container.innerHTML += `
             <div class="bg-kokarteCard/90 rounded-2xl border border-emerald-800/50 overflow-hidden glass-card space-y-0" data-aos="fade-up">
                 
@@ -101,13 +110,14 @@ function carregarEventosIniciais() {
 
                     <div class="space-y-1">
                         <h3 class="font-bold text-white text-base sm:text-lg">${evt.titulo}</h3>
-                        ${evt.descricao ? `<p class="text-xs sm:text-sm text-emerald-200/80 leading-relaxed">${evt.descricao}</p>` : ''}
+                        ${textoBreve ? `<p class="text-xs sm:text-sm text-emerald-200/80 leading-relaxed">${textoBreve}</p>` : ''}
                     </div>
 
                     <div class="pt-2">
-                        <button onclick="agendarWhatsApp('Evento: ${evt.titulo}')" class="w-full text-center bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shadow-sm hover:scale-[1.02]">
-                            Garantir Vaga no Evento
-                        </button>
+                        <!-- Botão para redirecionar para a página detalhada -->
+                        <a href="eventos.html" class="block w-full text-center bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shadow-sm hover:scale-[1.02]">
+                            Saber Mais
+                        </a>
                     </div>
                 </div>
             </div>
@@ -117,5 +127,78 @@ function carregarEventosIniciais() {
     // Atualiza o AOS (animações de scroll) para os elementos dinâmicos
     if (typeof AOS !== 'undefined') {
         AOS.refresh();
+    }
+}
+
+// 5. Lógica de Partilha do Oráculo (Gerar Imagem com fundo.jpeg)
+async function partilharMensagem() {
+    const oraculoTextoAtual = document.getElementById("oraculo-texto").innerText;
+    const textoPartilhaElemento = document.getElementById("texto-partilha");
+    const cartaoPartilha = document.getElementById("cartao-partilha");
+    const btnPartilhar = document.getElementById("btn-partilhar");
+    
+    if (!oraculoTextoAtual || !cartaoPartilha) return;
+
+    // Coloca a frase atual no cartão invisível
+    textoPartilhaElemento.innerText = oraculoTextoAtual;
+    
+    // Altera o estado do botão para avisar que está a carregar
+    const textoOriginalBotao = btnPartilhar.innerHTML;
+    btnPartilhar.innerHTML = "A gerar carta... ✨";
+    btnPartilhar.disabled = true;
+
+    try {
+        // Tira o "print" ao elemento escondido usando a biblioteca html2canvas
+        const canvas = await html2canvas(cartaoPartilha, {
+            scale: 1, // Escala 1 é suficiente pois já está em 1080x1920
+            useCORS: true, // Permite carregar a imagem de fundo localmente
+            backgroundColor: null // Fundo transparente para captar o jpeg de fundo
+        });
+
+        // Converte o canvas para Blob (ficheiro bruto) para podermos partilhar
+        canvas.toBlob(async (blob) => {
+            const file = new File([blob], "kokarte-oraculo.png", { type: "image/png" });
+
+            // Verifica se o dispositivo suporta a Web Share API (normalmente Telemóveis)
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({
+                        title: 'A minha mensagem do Oráculo KOKARTE',
+                        text: 'Vê o conselho que recebi hoje no portal da KOKARTE! ✨',
+                        files: [file]
+                    });
+                    
+                    // Restaura o botão ao estado normal
+                    btnPartilhar.innerHTML = textoOriginalBotao;
+                    btnPartilhar.disabled = false;
+                } catch (error) {
+                    console.log("O utilizador cancelou a partilha ou ocorreu um erro ligeiro.");
+                    btnPartilhar.innerHTML = textoOriginalBotao;
+                    btnPartilhar.disabled = false;
+                }
+            } else {
+                // Fallback para PC ou telemóveis antigos: Descarregar a imagem automaticamente
+                const link = document.createElement("a");
+                link.download = "kokarte-oraculo.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                
+                // Em vez de usar alert(), damos feedback no próprio botão (mais moderno e bonito)
+                btnPartilhar.innerHTML = "Guardado com Sucesso! ✅";
+                setTimeout(() => {
+                    btnPartilhar.innerHTML = textoOriginalBotao;
+                    btnPartilhar.disabled = false;
+                }, 3500);
+            }
+        }, 'image/png');
+
+    } catch (error) {
+        console.error("Erro ao gerar imagem:", error);
+        
+        btnPartilhar.innerHTML = "Falha ao Gerar ❌";
+        setTimeout(() => {
+            btnPartilhar.innerHTML = textoOriginalBotao;
+            btnPartilhar.disabled = false;
+        }, 3000);
     }
 }
