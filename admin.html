@@ -146,10 +146,10 @@
            ABAS / TABS
         ============================================ */
         .tab-btn {
-            padding: 10px 24px;
+            padding: 10px 20px;
             border-radius: 12px 12px 0 0;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             transition: all 0.3s ease;
@@ -191,6 +191,23 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           SELECT PERSONALIZADO
+        ============================================ */
+        select.glass-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%23D4AF37' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+        select.glass-input option {
+            background: #1a3a2a;
+            color: #E2ECE6;
         }
     </style>
 </head>
@@ -242,7 +259,7 @@
         <header class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-kokarteGold/20 pb-4 fade-in">
             <div>
                 <h1 class="text-xl font-bold text-kokarteGold font-display">Painel de Administração KOKARTE</h1>
-                <p class="text-xs text-emerald-200/60 font-sans tracking-wider">Gere eventos, serviços e conteúdos do portal</p>
+                <p class="text-xs text-emerald-200/60 font-sans tracking-wider">Gere eventos, serviços e energias do portal</p>
             </div>
             <div class="flex gap-3">
                 <a href="index.html" class="btn-gold-secondary text-xs font-semibold px-4 py-2 rounded-lg">
@@ -255,15 +272,18 @@
         </header>
 
         <!-- ==========================================
-        TABS: EVENTOS | SERVIÇOS
+        TABS: EVENTOS | SERVIÇOS | ENERGIA
         ========================================== -->
-        <div class="border-b border-kokarteGold/20">
-            <div class="flex gap-1 overflow-x-auto">
+        <div class="border-b border-kokarteGold/20 overflow-x-auto">
+            <div class="flex gap-1 min-w-max">
                 <button class="tab-btn active" data-tab="tab-eventos" onclick="mudarTab('tab-eventos')">
                     📅 Eventos
                 </button>
                 <button class="tab-btn" data-tab="tab-servicos" onclick="mudarTab('tab-servicos')">
                     ✨ Serviços
+                </button>
+                <button class="tab-btn" data-tab="tab-energia" onclick="mudarTab('tab-energia')">
+                    🌙 Energia do Mês
                 </button>
             </div>
         </div>
@@ -429,10 +449,116 @@
             </section>
 
             <!-- Lista Serviços -->
-            <section class="space-y-4 pb-12">
+            <section class="space-y-4 pb-4">
                 <h2 class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans">Lista de Serviços Guardados</h2>
                 <div class="divider-gold"></div>
                 <div id="tabela-servicos" class="space-y-3">
+                    <!-- Inserido dinamicamente pelo JavaScript -->
+                </div>
+            </section>
+        </div>
+
+        <!-- ==========================================
+        TAB: ENERGIA DO MÊS
+        ========================================== -->
+        <div id="tab-energia" class="tab-content space-y-6">
+            
+            <!-- Seletor de Ano -->
+            <section class="glass-premium p-6 rounded-2xl">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <label class="text-sm font-sans font-semibold text-kokarteGold tracking-wider">🌙 Gerir Energias Mensais</label>
+                    <div class="flex items-center gap-3">
+                        <label class="text-xs text-emerald-200/70 font-sans">Ano:</label>
+                        <select id="energia-ano-select" onchange="carregarEnergiasAdmin()" class="glass-input rounded-lg p-2 text-sm text-white w-28">
+                            <option value="2025">2025</option>
+                            <option value="2026" selected>2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="text-xs text-emerald-200/50 font-sans mt-3">Selecione um mês para editar ou crie energias para meses futuros.</p>
+            </section>
+
+            <!-- Formulário Editar Energia -->
+            <section class="glass-premium p-6 rounded-2xl">
+                <h2 id="form-titulo-energia" class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans mb-4">
+                    ✏️ Editar Energia do Mês
+                </h2>
+                
+                <form id="form-energia" onsubmit="guardarEnergia(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="hidden" id="energia-id">
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Mês</label>
+                        <select id="energia-mes-select" required class="w-full glass-input rounded-lg p-2.5 text-sm text-white">
+                            <option value="0">Janeiro</option>
+                            <option value="1">Fevereiro</option>
+                            <option value="2">Março</option>
+                            <option value="3">Abril</option>
+                            <option value="4">Maio</option>
+                            <option value="5">Junho</option>
+                            <option value="6">Julho</option>
+                            <option value="7">Agosto</option>
+                            <option value="8">Setembro</option>
+                            <option value="9">Outubro</option>
+                            <option value="10">Novembro</option>
+                            <option value="11">Dezembro</option>
+                        </select>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Título (ex: Janeiro — Energia da Renovação)</label>
+                        <input type="text" id="energia-titulo" required placeholder="Ex: Janeiro — Energia da Renovação e Novos Começos" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">💎 Cristal Guia</label>
+                        <input type="text" id="energia-cristal" required placeholder="Ex: Quartzo Transparente" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">✨ Benefícios</label>
+                        <input type="text" id="energia-beneficios" required placeholder="Ex: Limpeza energética, clareza mental..." 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">⚠️ Cuidados & Atenção</label>
+                        <input type="text" id="energia-cuidados" required placeholder="Ex: Evita acumular sentimentos do ano passado..." 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">🙏 Afirmação</label>
+                        <textarea id="energia-afirmacao" rows="2" required placeholder="Ex: Eu abro os meus braços para as infinitas possibilidades..." 
+                                  class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50 resize-none"></textarea>
+                    </div>
+
+                    <div class="flex items-center space-x-2 md:col-span-2 mt-2">
+                        <input type="checkbox" id="energia-ativo" checked class="w-4 h-4 accent-kokarteGold rounded cursor-pointer">
+                        <label for="energia-ativo" class="text-xs text-emerald-200/70 font-sans cursor-pointer">Ativo no Website</label>
+                    </div>
+
+                    <div class="md:col-span-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
+                        <button type="submit" class="btn-gold-primary flex-1 py-3 rounded-lg text-xs uppercase tracking-wider">
+                            Guardar Energia
+                        </button>
+                        <button type="button" onclick="limparFormularioEnergia()" 
+                                class="btn-gold-secondary px-6 py-3 rounded-lg text-xs uppercase tracking-wider">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Lista Energias -->
+            <section class="space-y-4 pb-12">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans">Lista de Energias Guardadas</h2>
+                <div class="divider-gold"></div>
+                <div id="tabela-energias" class="space-y-2">
                     <!-- Inserido dinamicamente pelo JavaScript -->
                 </div>
             </section>

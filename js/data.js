@@ -1,3 +1,8 @@
+// ============================================================
+// 📦 DADOS KOKARTE — VERSÃO DINÂMICA
+// ============================================================
+
+// As mensagens do oráculo permanecem fixas (não precisam de ser editadas)
 const ORACULO_MENSAGENS = [
     // --- MENSAGENS ESPECIAIS (FRASES DA TUA IRMÃ - POSIÇÕES 1 A 20) ---
     "Tens tentado fazer tudo certo, agradar toda a gente e evitar conflitos. Mas, no meio desse esforço, foste-te afastando de ti. Hoje faz uma pausa e pergunta-te uma coisa muito simples: “O que é que eu preciso?” Talvez seja a primeira vez, em muito tempo, que te permites ouvir essa resposta.",
@@ -95,90 +100,106 @@ const ORACULO_MENSAGENS = [
     "Cada novo amanhecer é uma oportunidade para renovar a tua energia e manifestar os teus sonhos."
 ];
 
-// Dados das Energias dos 12 Meses (Automação de Janeiro a Dezembro)
-const ENERGIAS_MESES = {
-    0: { // Janeiro
-        mes: "Janeiro — Energia da Renovação e Novos Começos",
-        cristal: "Quartzo Transparente",
-        beneficios: "Limpeza energética, clareza mental e definição de intenções elevadas.",
-        cuidados: "Evita acumular sentimentos do ano passado. Deixa ir o que já não te serve.",
-        afirmacao: "Eu abro os meus braços para as infinitas possibilidades de luz deste novo ciclo."
-    },
-    1: { // Fevereiro
-        mes: "Fevereiro — Energia da Intuição e Conexão",
-        cristal: "Ametista",
-        beneficios: "Tranquilidade emocional, elevação espiritual e proteção contra energias densas.",
-        cuidados: "Atenção ao desgaste mental. Reserva momentos diários para momentos de silêncio.",
-        afirmacao: "A minha intuição é o meu guia sagrado. Eu escuto a sabedoria da minha alma."
-    },
-    2: { // Março
-        mes: "Março — Energia do Equilíbrio e Cura",
-        cristal: "Quartzo Verde",
-        beneficios: "Vitalidade física, harmonização do chakra cardíaco e regeneração de forças.",
-        cuidados: "Não guardes ressentimentos. A cura começa quando perdoas a ti e aos outros.",
-        afirmacao: "A minha vida flui em perfeita harmonia, saúde e amor incondicional."
-    },
-    3: { // Abril
-        mes: "Abril — Energia da Força e Foco",
-        cristal: "Olho de Tigre",
-        beneficios: "Proteção espiritual, coragem para ultrapassar obstáculos e foco nos objetivos.",
-        cuidados: "Cuidado com o excesso de autocrítica. Reconhece cada pequeno avanço teu.",
-        afirmacao: "Eu sou forte, protegido(a) e capaz de vencer qualquer desafio com sabedoria."
-    },
-    4: { // Maio
-        mes: "Maio — Energia do Amor Próprio e Acolhimento",
-        cristal: "Quartzo Rosa",
-        beneficios: "Abertura para o amor, pacificação de mágoas e fortalecimento da autoestima.",
-        cuidados: "Evita procurar validação externa. O amor mais profundo nasce dentro de ti.",
-        afirmacao: "Eu mereço todo o amor, respeito e abundância que o universo tem para me dar."
-    },
-    5: { // Junho
-        mes: "Junho — Energia da Prosperidade e Luz Solar",
-        cristal: "Citrino",
-        beneficios: "Alegria de viver, atração de abundância e desbloqueio da criatividade.",
-        cuidados: "Cuidado com pensamentos de escassez. Foca na gratidão do que já conquistaste.",
-        afirmacao: "A minha energia é radiante como o sol. Eu atraio prosperidade em todas as áreas."
-    },
-    6: { // Julho
-        mes: "Julho — Energia da Proteção e Ancoramento",
-        cristal: "Turmalina Negra",
-        beneficios: "Escudo contra inveja e maus-olhados, estabilidade emocional e enraizamento.",
-        cuidados: "Protege o teu campo energético de conversas negativas ou ambientes pesados.",
-        afirmacao: "Eu estou profundamente protegido(a), centrado(a) e seguro(a) na minha luz."
-    },
-    7: { // Agosto
-        mes: "Agosto — Energia da Sabedoria e Expressão",
-        cristal: "Lápis-Lazúli",
-        beneficios: "Clareza na comunicação, paz interior e despertar da sabedoria ancestral.",
-        cuidados: "Não te cales por medo do julgamento. A tua verdade é valiosa.",
-        afirmacao: "Eu expresso a minha verdade com amor, firmeza e sabedoria."
-    },
-    8: { // Setembro
-        mes: "Setembro — Energia da Colheita e Gratidão",
-        cristal: "Cornalina",
-        beneficios: "Motivação, coragem para agir e celebração das tuas conquistas.",
-        cuidados: "Evita a procrastinação. Dá o primeiro passo, mesmo que pareça pequeno.",
-        afirmacao: "Eu colho com gratidão os frutos do meu trabalho e da minha dedicação."
-    },
-    9: { // Outubro
-        mes: "Outubro — Energia da Transformação",
-        cristal: "Obsidiana",
-        beneficios: "Libertação de bloqueios profundos, transformação pessoal e coragem espiritual.",
-        cuidados: "Não tenhas medo da mudança. O fim de um ciclo é o início de algo maior.",
-        afirmacao: "Eu liberto o passado com gratidão e acolho a minha melhor versão."
-    },
-    10: { // Novembro
-        mes: "Novembro — Energia da Paz e Espiritualidade",
-        cristal: "Selenita",
-        beneficios: "Purificação de ambientes, elevação vibracional e conexão angelical.",
-        cuidados: "Evita confusões ou correrias desnecessárias. Procura momentos de serenidade.",
-        afirmacao: "A minha mente está em paz e o meu espírito conectado com a luz divina."
-    },
-    11: { // Dezembro
-        mes: "Dezembro — Energia da Celebração e Encerramento",
-        cristal: "Pedra do Sol",
-        beneficios: "Sentimento de dever cumprido, calor humano e renovação das esperanças.",
-        cuidados: "Evita o cansaço extremo nas festividades. Prioriza o teu descanso.",
-        afirmacao: "Eu celebro a minha caminhada e recebo a nova fase com o coração cheio de luz."
+// ============================================================
+// 🌙 FUNÇÃO PARA OBTER A ENERGIA DO MÊS (dinâmica)
+// ============================================================
+function obterEnergiaDoMes() {
+    const mesAtual = new Date().getMonth();
+    const anoAtual = new Date().getFullYear();
+    
+    try {
+        const dados = localStorage.getItem('kokarte_energias');
+        if (dados) {
+            const energias = JSON.parse(dados);
+            // Procura a energia do mês atual e ano atual
+            const energia = energias.find(e => e.mesNumero === mesAtual && e.ano === anoAtual && e.ativo);
+            if (energia) {
+                return energia;
+            }
+            
+            // Se não encontrar, tenta buscar do ano anterior
+            const energiaAnoAnterior = energias.find(e => e.mesNumero === mesAtual && e.ano === anoAtual - 1 && e.ativo);
+            if (energiaAnoAnterior) {
+                return energiaAnoAnterior;
+            }
+        }
+    } catch (e) {
+        console.error('Erro ao ler energias:', e);
     }
+    
+    // Fallback: dados fixos (caso não haja dados no localStorage)
+    const ENERGIAS_FIXAS = {
+        0: { mes: "Janeiro — Energia da Renovação e Novos Começos", cristal: "Quartzo Transparente", beneficios: "Limpeza energética, clareza mental e definição de intenções elevadas.", cuidados: "Evita acumular sentimentos do ano passado. Deixa ir o que já não te serve.", afirmacao: "Eu abro os meus braços para as infinitas possibilidades de luz deste novo ciclo." },
+        1: { mes: "Fevereiro — Energia da Intuição e Conexão", cristal: "Ametista", beneficios: "Tranquilidade emocional, elevação espiritual e proteção contra energias densas.", cuidados: "Atenção ao desgaste mental. Reserva momentos diários para momentos de silêncio.", afirmacao: "A minha intuição é o meu guia sagrado. Eu escuto a sabedoria da minha alma." },
+        2: { mes: "Março — Energia do Equilíbrio e Cura", cristal: "Quartzo Verde", beneficios: "Vitalidade física, harmonização do chakra cardíaco e regeneração de forças.", cuidados: "Não guardes ressentimentos. A cura começa quando perdoas a ti e aos outros.", afirmacao: "A minha vida flui em perfeita harmonia, saúde e amor incondicional." },
+        3: { mes: "Abril — Energia da Força e Foco", cristal: "Olho de Tigre", beneficios: "Proteção espiritual, coragem para ultrapassar obstáculos e foco nos objetivos.", cuidados: "Cuidado com o excesso de autocrítica. Reconhece cada pequeno avanço teu.", afirmacao: "Eu sou forte, protegido(a) e capaz de vencer qualquer desafio com sabedoria." },
+        4: { mes: "Maio — Energia do Amor Próprio e Acolhimento", cristal: "Quartzo Rosa", beneficios: "Abertura para o amor, pacificação de mágoas e fortalecimento da autoestima.", cuidados: "Evita procurar validação externa. O amor mais profundo nasce dentro de ti.", afirmacao: "Eu mereço todo o amor, respeito e abundância que o universo tem para me dar." },
+        5: { mes: "Junho — Energia da Prosperidade e Luz Solar", cristal: "Citrino", beneficios: "Alegria de viver, atração de abundância e desbloqueio da criatividade.", cuidados: "Cuidado com pensamentos de escassez. Foca na gratidão do que já conquistaste.", afirmacao: "A minha energia é radiante como o sol. Eu atraio prosperidade em todas as áreas." },
+        6: { mes: "Julho — Energia da Proteção e Ancoramento", cristal: "Turmalina Negra", beneficios: "Escudo contra inveja e maus-olhados, estabilidade emocional e enraizamento.", cuidados: "Protege o teu campo energético de conversas negativas ou ambientes pesados.", afirmacao: "Eu estou profundamente protegido(a), centrado(a) e seguro(a) na minha luz." },
+        7: { mes: "Agosto — Energia da Sabedoria e Expressão", cristal: "Lápis-Lazúli", beneficios: "Clareza na comunicação, paz interior e despertar da sabedoria ancestral.", cuidados: "Não te cales por medo do julgamento. A tua verdade é valiosa.", afirmacao: "Eu expresso a minha verdade com amor, firmeza e sabedoria." },
+        8: { mes: "Setembro — Energia da Colheita e Gratidão", cristal: "Cornalina", beneficios: "Motivação, coragem para agir e celebração das tuas conquistas.", cuidados: "Evita a procrastinação. Dá o primeiro passo, mesmo que pareça pequeno.", afirmacao: "Eu colho com gratidão os frutos do meu trabalho e da minha dedicação." },
+        9: { mes: "Outubro — Energia da Transformação", cristal: "Obsidiana", beneficios: "Libertação de bloqueios profundos, transformação pessoal e coragem espiritual.", cuidados: "Não tenhas medo da mudança. O fim de um ciclo é o início de algo maior.", afirmacao: "Eu liberto o passado com gratidão e acolho a minha melhor versão." },
+        10: { mes: "Novembro — Energia da Paz e Espiritualidade", cristal: "Selenita", beneficios: "Purificação de ambientes, elevação vibracional e conexão angelical.", cuidados: "Evita confusões ou correrias desnecessárias. Procura momentos de serenidade.", afirmacao: "A minha mente está em paz e o meu espírito conectado com a luz divina." },
+        11: { mes: "Dezembro — Energia da Celebração e Encerramento", cristal: "Pedra do Sol", beneficios: "Sentimento de dever cumprido, calor humano e renovação das esperanças.", cuidados: "Evita o cansaço extremo nas festividades. Prioriza o teu descanso.", afirmacao: "Eu celebro a minha caminhada e recebo a nova fase com o coração cheio de luz." }
+    };
+    
+    return ENERGIAS_FIXAS[mesAtual] || ENERGIAS_FIXAS[0];
+}
+
+// ============================================================
+// 🔄 FUNÇÃO PARA ATUALIZAR A ENERGIA NO INDEX
+// ============================================================
+function carregarEnergiaDoMes() {
+    const energia = obterEnergiaDoMes();
+    
+    if (!energia) return;
+    
+    // Suporte para o formato antigo (mes) e novo (titulo)
+    const titulo = energia.titulo || energia.mes || "---";
+    const cristal = energia.cristal || "---";
+    const beneficios = energia.beneficios || "---";
+    const cuidados = energia.cuidados || "---";
+    const afirmacao = energia.afirmacao || "---";
+    
+    if (document.getElementById('energia-mes-titulo')) {
+        document.getElementById('energia-mes-titulo').innerText = titulo;
+    }
+    if (document.getElementById('energia-cristal')) {
+        document.getElementById('energia-cristal').innerText = cristal;
+    }
+    if (document.getElementById('energia-beneficios')) {
+        document.getElementById('energia-beneficios').innerText = beneficios;
+    }
+    if (document.getElementById('energia-cuidados')) {
+        document.getElementById('energia-cuidados').innerText = cuidados;
+    }
+    if (document.getElementById('energia-afirmacao')) {
+        document.getElementById('energia-afirmacao').innerText = afirmacao;
+    }
+}
+
+// ============================================================
+// ⚠️ MANTÉM A COMPATIBILIDADE COM O CÓDIGO EXISTENTE
+// ============================================================
+// Para não quebrar o código antigo que usava ENERGIAS_MESES,
+// criamos um proxy que usa a função dinâmica
+const ENERGIAS_MESES = {
+    0: { mes: "Janeiro — Energia da Renovação e Novos Começos", cristal: "Quartzo Transparente", beneficios: "Limpeza energética, clareza mental e definição de intenções elevadas.", cuidados: "Evita acumular sentimentos do ano passado. Deixa ir o que já não te serve.", afirmacao: "Eu abro os meus braços para as infinitas possibilidades de luz deste novo ciclo." },
+    1: { mes: "Fevereiro — Energia da Intuição e Conexão", cristal: "Ametista", beneficios: "Tranquilidade emocional, elevação espiritual e proteção contra energias densas.", cuidados: "Atenção ao desgaste mental. Reserva momentos diários para momentos de silêncio.", afirmacao: "A minha intuição é o meu guia sagrado. Eu escuto a sabedoria da minha alma." },
+    2: { mes: "Março — Energia do Equilíbrio e Cura", cristal: "Quartzo Verde", beneficios: "Vitalidade física, harmonização do chakra cardíaco e regeneração de forças.", cuidados: "Não guardes ressentimentos. A cura começa quando perdoas a ti e aos outros.", afirmacao: "A minha vida flui em perfeita harmonia, saúde e amor incondicional." },
+    3: { mes: "Abril — Energia da Força e Foco", cristal: "Olho de Tigre", beneficios: "Proteção espiritual, coragem para ultrapassar obstáculos e foco nos objetivos.", cuidados: "Cuidado com o excesso de autocrítica. Reconhece cada pequeno avanço teu.", afirmacao: "Eu sou forte, protegido(a) e capaz de vencer qualquer desafio com sabedoria." },
+    4: { mes: "Maio — Energia do Amor Próprio e Acolhimento", cristal: "Quartzo Rosa", beneficios: "Abertura para o amor, pacificação de mágoas e fortalecimento da autoestima.", cuidados: "Evita procurar validação externa. O amor mais profundo nasce dentro de ti.", afirmacao: "Eu mereço todo o amor, respeito e abundância que o universo tem para me dar." },
+    5: { mes: "Junho — Energia da Prosperidade e Luz Solar", cristal: "Citrino", beneficios: "Alegria de viver, atração de abundância e desbloqueio da criatividade.", cuidados: "Cuidado com pensamentos de escassez. Foca na gratidão do que já conquistaste.", afirmacao: "A minha energia é radiante como o sol. Eu atraio prosperidade em todas as áreas." },
+    6: { mes: "Julho — Energia da Proteção e Ancoramento", cristal: "Turmalina Negra", beneficios: "Escudo contra inveja e maus-olhados, estabilidade emocional e enraizamento.", cuidados: "Protege o teu campo energético de conversas negativas ou ambientes pesados.", afirmacao: "Eu estou profundamente protegido(a), centrado(a) e seguro(a) na minha luz." },
+    7: { mes: "Agosto — Energia da Sabedoria e Expressão", cristal: "Lápis-Lazúli", beneficios: "Clareza na comunicação, paz interior e despertar da sabedoria ancestral.", cuidados: "Não te cales por medo do julgamento. A tua verdade é valiosa.", afirmacao: "Eu expresso a minha verdade com amor, firmeza e sabedoria." },
+    8: { mes: "Setembro — Energia da Colheita e Gratidão", cristal: "Cornalina", beneficios: "Motivação, coragem para agir e celebração das tuas conquistas.", cuidados: "Evita a procrastinação. Dá o primeiro passo, mesmo que pareça pequeno.", afirmacao: "Eu colho com gratidão os frutos do meu trabalho e da minha dedicação." },
+    9: { mes: "Outubro — Energia da Transformação", cristal: "Obsidiana", beneficios: "Libertação de bloqueios profundos, transformação pessoal e coragem espiritual.", cuidados: "Não tenhas medo da mudança. O fim de um ciclo é o início de algo maior.", afirmacao: "Eu liberto o passado com gratidão e acolho a minha melhor versão." },
+    10: { mes: "Novembro — Energia da Paz e Espiritualidade", cristal: "Selenita", beneficios: "Purificação de ambientes, elevação vibracional e conexão angelical.", cuidados: "Evita confusões ou correrias desnecessárias. Procura momentos de serenidade.", afirmacao: "A minha mente está em paz e o meu espírito conectado com a luz divina." },
+    11: { mes: "Dezembro — Energia da Celebração e Encerramento", cristal: "Pedra do Sol", beneficios: "Sentimento de dever cumprido, calor humano e renovação das esperanças.", cuidados: "Evita o cansaço extremo nas festividades. Prioriza o teu descanso.", afirmacao: "Eu celebro a minha caminhada e recebo a nova fase com o coração cheio de luz." }
 };
+
+// ============================================================
+// EXPOR FUNÇÕES GLOBALMENTE
+// ============================================================
+window.obterEnergiaDoMes = obterEnergiaDoMes;
+window.carregarEnergiaDoMes = carregarEnergiaDoMes;

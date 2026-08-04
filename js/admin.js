@@ -185,27 +185,28 @@ function mostrarPainel() {
     document.getElementById('painel-admin').classList.remove('hidden');
     carregarEventosAdmin();
     carregarServicosAdmin();
+    carregarEnergiasAdmin();
 }
 
 // ============================================================
 // 7. MUDAR TAB
 // ============================================================
 function mudarTab(tabId) {
-    // Esconde todas as tabs
     document.querySelectorAll('.tab-content').forEach(el => {
         el.classList.remove('active');
     });
     
-    // Remove active de todos os botões
     document.querySelectorAll('.tab-btn').forEach(el => {
         el.classList.remove('active');
     });
     
-    // Mostra a tab selecionada
     document.getElementById(tabId).classList.add('active');
-    
-    // Ativa o botão correspondente
     document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+    
+    // Recarrega os dados quando mudar para a tab de energia
+    if (tabId === 'tab-energia') {
+        carregarEnergiasAdmin();
+    }
 }
 
 // ============================================================
@@ -256,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================
-// 9. CONFIGURAR UPLOAD DE IMAGEM (genérico)
+// 9. CONFIGURAR UPLOAD DE IMAGEM
 // ============================================================
 function configurarUploadDeImagem(prefixo) {
     const inputImagem = document.getElementById(`${prefixo}-imagem`);
@@ -489,7 +490,6 @@ function apagarEvento(id) {
 // ============================================================
 // ============================================================
 
-// ----- DADOS INICIAIS (fallback) -----
 const SERVICOS_INICIAIS = [
     {
         id: 1001,
@@ -549,7 +549,6 @@ function lerServicos() {
         if (dados) {
             return JSON.parse(dados);
         } else {
-            // Se não houver dados, guarda os serviços iniciais
             guardarServicos(SERVICOS_INICIAIS);
             return SERVICOS_INICIAIS;
         }
@@ -716,6 +715,330 @@ function apagarServico(id) {
 }
 
 // ============================================================
+// ============================================================
+// 🌙 GESTÃO DE ENERGIAS MENSAIS
+// ============================================================
+// ============================================================
+
+const ENERGIAS_INICIAIS = [
+    {
+        id: 0,
+        mesNumero: 0,
+        mesNome: "Janeiro",
+        titulo: "Janeiro — Energia da Renovação e Novos Começos",
+        cristal: "Quartzo Transparente",
+        beneficios: "Limpeza energética, clareza mental e definição de intenções elevadas.",
+        cuidados: "Evita acumular sentimentos do ano passado. Deixa ir o que já não te serve.",
+        afirmacao: "Eu abro os meus braços para as infinitas possibilidades de luz deste novo ciclo.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 1,
+        mesNumero: 1,
+        mesNome: "Fevereiro",
+        titulo: "Fevereiro — Energia da Intuição e Conexão",
+        cristal: "Ametista",
+        beneficios: "Tranquilidade emocional, elevação espiritual e proteção contra energias densas.",
+        cuidados: "Atenção ao desgaste mental. Reserva momentos diários para momentos de silêncio.",
+        afirmacao: "A minha intuição é o meu guia sagrado. Eu escuto a sabedoria da minha alma.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 2,
+        mesNumero: 2,
+        mesNome: "Março",
+        titulo: "Março — Energia do Equilíbrio e Cura",
+        cristal: "Quartzo Verde",
+        beneficios: "Vitalidade física, harmonização do chakra cardíaco e regeneração de forças.",
+        cuidados: "Não guardes ressentimentos. A cura começa quando perdoas a ti e aos outros.",
+        afirmacao: "A minha vida flui em perfeita harmonia, saúde e amor incondicional.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 3,
+        mesNumero: 3,
+        mesNome: "Abril",
+        titulo: "Abril — Energia da Força e Foco",
+        cristal: "Olho de Tigre",
+        beneficios: "Proteção espiritual, coragem para ultrapassar obstáculos e foco nos objetivos.",
+        cuidados: "Cuidado com o excesso de autocrítica. Reconhece cada pequeno avanço teu.",
+        afirmacao: "Eu sou forte, protegido(a) e capaz de vencer qualquer desafio com sabedoria.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 4,
+        mesNumero: 4,
+        mesNome: "Maio",
+        titulo: "Maio — Energia do Amor Próprio e Acolhimento",
+        cristal: "Quartzo Rosa",
+        beneficios: "Abertura para o amor, pacificação de mágoas e fortalecimento da autoestima.",
+        cuidados: "Evita procurar validação externa. O amor mais profundo nasce dentro de ti.",
+        afirmacao: "Eu mereço todo o amor, respeito e abundância que o universo tem para me dar.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 5,
+        mesNumero: 5,
+        mesNome: "Junho",
+        titulo: "Junho — Energia da Prosperidade e Luz Solar",
+        cristal: "Citrino",
+        beneficios: "Alegria de viver, atração de abundância e desbloqueio da criatividade.",
+        cuidados: "Cuidado com pensamentos de escassez. Foca na gratidão do que já conquistaste.",
+        afirmacao: "A minha energia é radiante como o sol. Eu atraio prosperidade em todas as áreas.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 6,
+        mesNumero: 6,
+        mesNome: "Julho",
+        titulo: "Julho — Energia da Proteção e Ancoramento",
+        cristal: "Turmalina Negra",
+        beneficios: "Escudo contra inveja e maus-olhados, estabilidade emocional e enraizamento.",
+        cuidados: "Protege o teu campo energético de conversas negativas ou ambientes pesados.",
+        afirmacao: "Eu estou profundamente protegido(a), centrado(a) e seguro(a) na minha luz.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 7,
+        mesNumero: 7,
+        mesNome: "Agosto",
+        titulo: "Agosto — Energia da Sabedoria e Expressão",
+        cristal: "Lápis-Lazúli",
+        beneficios: "Clareza na comunicação, paz interior e despertar da sabedoria ancestral.",
+        cuidados: "Não te cales por medo do julgamento. A tua verdade é valiosa.",
+        afirmacao: "Eu expresso a minha verdade com amor, firmeza e sabedoria.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 8,
+        mesNumero: 8,
+        mesNome: "Setembro",
+        titulo: "Setembro — Energia da Colheita e Gratidão",
+        cristal: "Cornalina",
+        beneficios: "Motivação, coragem para agir e celebração das tuas conquistas.",
+        cuidados: "Evita a procrastinação. Dá o primeiro passo, mesmo que pareça pequeno.",
+        afirmacao: "Eu colho com gratidão os frutos do meu trabalho e da minha dedicação.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 9,
+        mesNumero: 9,
+        mesNome: "Outubro",
+        titulo: "Outubro — Energia da Transformação",
+        cristal: "Obsidiana",
+        beneficios: "Libertação de bloqueios profundos, transformação pessoal e coragem espiritual.",
+        cuidados: "Não tenhas medo da mudança. O fim de um ciclo é o início de algo maior.",
+        afirmacao: "Eu liberto o passado com gratidão e acolho a minha melhor versão.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 10,
+        mesNumero: 10,
+        mesNome: "Novembro",
+        titulo: "Novembro — Energia da Paz e Espiritualidade",
+        cristal: "Selenita",
+        beneficios: "Purificação de ambientes, elevação vibracional e conexão angelical.",
+        cuidados: "Evita confusões ou correrias desnecessárias. Procura momentos de serenidade.",
+        afirmacao: "A minha mente está em paz e o meu espírito conectado com a luz divina.",
+        ativo: true,
+        ano: 2026
+    },
+    {
+        id: 11,
+        mesNumero: 11,
+        mesNome: "Dezembro",
+        titulo: "Dezembro — Energia da Celebração e Encerramento",
+        cristal: "Pedra do Sol",
+        beneficios: "Sentimento de dever cumprido, calor humano e renovação das esperanças.",
+        cuidados: "Evita o cansaço extremo nas festividades. Prioriza o teu descanso.",
+        afirmacao: "Eu celebro a minha caminhada e recebo a nova fase com o coração cheio de luz.",
+        ativo: true,
+        ano: 2026
+    }
+];
+
+function lerEnergias() {
+    try {
+        const dados = localStorage.getItem('kokarte_energias');
+        if (dados) {
+            return JSON.parse(dados);
+        } else {
+            guardarEnergias(ENERGIAS_INICIAIS);
+            return ENERGIAS_INICIAIS;
+        }
+    } catch (e) {
+        return ENERGIAS_INICIAIS;
+    }
+}
+
+function guardarEnergias(energias) {
+    localStorage.setItem('kokarte_energias', JSON.stringify(energias));
+}
+
+function guardarEnergia(e) {
+    e.preventDefault();
+    
+    let energias = lerEnergias();
+    const idInput = document.getElementById('energia-id').value;
+    const ano = parseInt(document.getElementById('energia-ano-select').value);
+    const mesNumero = parseInt(document.getElementById('energia-mes-select').value);
+    const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    
+    const novaEnergia = {
+        id: idInput ? parseInt(idInput) : Date.now(),
+        mesNumero: mesNumero,
+        mesNome: meses[mesNumero],
+        titulo: document.getElementById('energia-titulo').value,
+        cristal: document.getElementById('energia-cristal').value,
+        beneficios: document.getElementById('energia-beneficios').value,
+        cuidados: document.getElementById('energia-cuidados').value,
+        afirmacao: document.getElementById('energia-afirmacao').value,
+        ativo: document.getElementById('energia-ativo').checked,
+        ano: ano
+    };
+
+    if (idInput) {
+        energias = energias.map(e => e.id === novaEnergia.id ? novaEnergia : e);
+    } else {
+        // Verifica se já existe energia para este mês/ano
+        const existe = energias.some(e => e.mesNumero === mesNumero && e.ano === ano);
+        if (existe) {
+            alert('⚠️ Já existe uma energia para este mês/ano. Edite a existente.');
+            return;
+        }
+        energias.push(novaEnergia);
+    }
+
+    try {
+        guardarEnergias(energias);
+        limparFormularioEnergia();
+        carregarEnergiasAdmin();
+        
+        const btnSubmit = document.querySelector('#form-energia button[type="submit"]');
+        const textoOriginal = btnSubmit.innerHTML;
+        btnSubmit.innerHTML = '✅ Guardado!';
+        btnSubmit.classList.add('bg-green-600');
+        setTimeout(() => {
+            btnSubmit.innerHTML = textoOriginal;
+            btnSubmit.classList.remove('bg-green-600');
+        }, 2000);
+    } catch (err) {
+        alert('❌ Ocorreu um erro ao guardar a energia.');
+    }
+}
+
+function limparFormularioEnergia() {
+    document.getElementById('form-energia').reset();
+    document.getElementById('energia-id').value = '';
+    document.getElementById('form-titulo-energia').innerHTML = '✏️ Editar Energia do Mês';
+    document.getElementById('energia-ativo').checked = true;
+}
+
+function carregarEnergiasAdmin() {
+    const container = document.getElementById('tabela-energias');
+    if (!container) return;
+    
+    const energias = lerEnergias();
+    const anoSelecionado = parseInt(document.getElementById('energia-ano-select').value);
+    const filtradas = energias.filter(e => e.ano === anoSelecionado);
+    
+    // Ordena por mês
+    filtradas.sort((a, b) => a.mesNumero - b.mesNumero);
+
+    if (filtradas.length === 0) {
+        container.innerHTML = `
+            <div class="bg-kokarteBg/50 border border-emerald-900/50 p-6 rounded-xl text-center">
+                <p class="text-emerald-200/50 text-sm">Nenhuma energia para o ano ${anoSelecionado}. Crie uma nova!</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = '';
+    filtradas.forEach(e => {
+        container.innerHTML += `
+            <div class="bg-kokarteBg border ${e.ativo ? 'border-kokarteGold/40' : 'border-red-900/50 opacity-70'} p-3 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3 transition-all">
+                <div class="flex-1 min-w-0 w-full">
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <span class="text-xs font-bold text-kokarteGold font-sans w-20">${e.mesNome}</span>
+                        <h4 class="font-bold text-white text-sm truncate flex-1">${e.titulo}</h4>
+                        ${!e.ativo ? '<span class="inline-block bg-red-950 text-red-400 text-[9px] px-2 py-0.5 rounded uppercase font-bold tracking-wider shrink-0">Oculto</span>' : '<span class="inline-block bg-emerald-900/50 text-emerald-400 text-[9px] px-2 py-0.5 rounded uppercase font-bold tracking-wider shrink-0">Ativo</span>'}
+                    </div>
+                    <p class="text-xs text-emerald-200/50 font-sans mt-1">💎 ${e.cristal}</p>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto justify-end shrink-0">
+                    <button type="button" onclick="toggleEnergia(${e.id})" class="${e.ativo ? 'bg-amber-950/40 text-amber-300' : 'bg-emerald-950/40 text-emerald-300'} text-[10px] px-3 py-1.5 rounded-lg transition-colors border border-amber-900/30">
+                        ${e.ativo ? 'Ocultar' : 'Ativar'}
+                    </button>
+                    <button type="button" onclick="editarEnergia(${e.id})" class="bg-kokarteCard hover:bg-kokarteGold hover:text-kokarteBg text-kokarteGold text-[10px] px-3 py-1.5 rounded-lg transition-colors border border-kokarteGold/30">
+                        Editar
+                    </button>
+                    <button type="button" onclick="apagarEnergia(${e.id})" class="bg-red-950/40 hover:bg-red-600 text-red-200 hover:text-white text-[10px] px-3 py-1.5 rounded-lg transition-colors border border-red-900/50">
+                        Apagar
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function toggleEnergia(id) {
+    let energias = lerEnergias();
+    const eIndex = energias.findIndex(e => e.id === id);
+    
+    if (eIndex !== -1) {
+        energias[eIndex].ativo = !energias[eIndex].ativo;
+        guardarEnergias(energias);
+        carregarEnergiasAdmin();
+    }
+}
+
+function editarEnergia(id) {
+    const energias = lerEnergias();
+    const e = energias.find(ener => ener.id === id);
+    if (!e) return;
+
+    document.getElementById('energia-id').value = e.id;
+    document.getElementById('energia-mes-select').value = e.mesNumero;
+    document.getElementById('energia-titulo').value = e.titulo || '';
+    document.getElementById('energia-cristal').value = e.cristal || '';
+    document.getElementById('energia-beneficios').value = e.beneficios || '';
+    document.getElementById('energia-cuidados').value = e.cuidados || '';
+    document.getElementById('energia-afirmacao').value = e.afirmacao || '';
+    document.getElementById('energia-ativo').checked = e.ativo;
+    
+    // Atualiza o ano no seletor
+    document.getElementById('energia-ano-select').value = e.ano || 2026;
+    
+    document.getElementById('form-titulo-energia').innerHTML = `✏️ A Editar: ${e.mesNome} ${e.ano}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function apagarEnergia(id) {
+    if (confirm('⚠️ Tens a certeza que queres apagar permanentemente esta energia?')) {
+        let energias = lerEnergias();
+        energias = energias.filter(e => e.id !== id);
+        guardarEnergias(energias);
+        
+        if (document.getElementById('energia-id').value == id) {
+            limparFormularioEnergia();
+        }
+        
+        carregarEnergiasAdmin();
+    }
+}
+
+// ============================================================
 // EXPOR FUNÇÕES GLOBALMENTE
 // ============================================================
 window.fazerLogin = fazerLogin;
@@ -737,3 +1060,11 @@ window.carregarServicosAdmin = carregarServicosAdmin;
 window.toggleServico = toggleServico;
 window.editarServico = editarServico;
 window.apagarServico = apagarServico;
+
+// Energias
+window.guardarEnergia = guardarEnergia;
+window.limparFormularioEnergia = limparFormularioEnergia;
+window.carregarEnergiasAdmin = carregarEnergiasAdmin;
+window.toggleEnergia = toggleEnergia;
+window.editarEnergia = editarEnergia;
+window.apagarEnergia = apagarEnergia;
