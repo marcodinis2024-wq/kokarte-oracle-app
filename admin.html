@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOKARTE — Painel de Administração</title>
+    
+    <!-- Google Fonts Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -15,128 +21,425 @@
                         kokarteCard: '#244232',
                         kokarteGold: '#D4AF37',
                         kokarteGoldHover: '#E5C158',
+                        kokarteGoldLight: '#F0D080',
                         kokarteText: '#E2ECE6'
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Lora', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
                     }
                 }
             }
         }
     </script>
-</head>
-<body class="bg-kokarteBg text-kokarteText font-sans min-h-screen p-4 md:p-8">
+    <style>
+        /* ============================================
+           VÍDEO DE FUNDO
+        ============================================ */
+        #background-video {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            pointer-events: none;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 17, 12, 0.55);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    <!-- ECRÃ DE LOGIN -->
-    <div id="sec-login" class="max-w-md mx-auto mt-16 bg-kokarteCard p-8 rounded-2xl border border-kokarteGold/40 shadow-2xl">
+        /* ============================================
+           GLASSMORPHISM
+        ============================================ */
+        .glass-premium {
+            background: rgba(36, 66, 50, 0.85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-premium:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 24px 72px rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-input {
+            background: rgba(18, 36, 26, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            border-color: #D4AF37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+            outline: none;
+        }
+
+        /* ============================================
+           BOTÕES PREMIUM
+        ============================================ */
+        .btn-gold-primary {
+            background: linear-gradient(145deg, #D4AF37, #B8952E);
+            color: #12241A;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.08);
+        }
+
+        .btn-gold-secondary {
+            background: transparent;
+            color: #D4AF37;
+            border: 2px solid #D4AF37;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold-secondary:hover {
+            background: #D4AF37;
+            color: #12241A;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25);
+        }
+
+        .btn-danger {
+            background: transparent;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-danger:hover {
+            background: #ef4444;
+            color: #12241A;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.25);
+        }
+
+        /* ============================================
+           DIVIDER DOURADO
+        ============================================ */
+        .divider-gold {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            margin: 0 auto;
+            opacity: 0.5;
+        }
+
+        /* ============================================
+           ABAS / TABS
+        ============================================ */
+        .tab-btn {
+            padding: 10px 24px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+            border-bottom: 3px solid transparent;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .tab-btn:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .tab-btn.active {
+            color: #D4AF37;
+            border-bottom-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        /* ============================================
+           SCROLLBAR
+        ============================================ */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #12241A; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+
+        /* ============================================
+           ANIMAÇÃO DE ENTRADA
+        ============================================ */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-kokarteText font-body min-h-screen p-4 md:p-8">
+
+    <!-- Vídeo de Fundo -->
+    <video id="background-video" autoplay muted loop playsinline preload="auto">
+        <source src="fundomotion.mp4" type="video/mp4">
+    </video>
+
+    <!-- ==========================================
+    ECRÃ DE LOGIN
+    ========================================== -->
+    <div id="sec-login" class="max-w-md mx-auto mt-16 glass-premium p-8 rounded-2xl fade-in">
         <div class="text-center mb-6">
-            <h1 class="text-2xl font-bold text-kokarteGold tracking-widest">KOKARTE</h1>
-            <p class="text-xs text-emerald-200/70 mt-1">Área Restrita de Gestão</p>
+            <h1 class="text-3xl font-bold text-kokarteGold font-display tracking-widest">KOKARTE</h1>
+            <div class="divider-gold my-3"></div>
+            <p class="text-xs text-emerald-200/70 font-sans tracking-wider mt-1">Área Restrita de Gestão</p>
         </div>
         <form onsubmit="fazerLogin(event)" class="space-y-4">
             <div>
-                <label class="block text-xs uppercase font-semibold text-kokarteGold mb-1">Palavra-passe de Acesso</label>
-                <input type="password" id="input-senha" required placeholder="Digite a palavra-passe..." class="w-full bg-kokarteBg border border-emerald-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-kokarteGold">
+                <label class="block text-xs uppercase font-semibold text-kokarteGold font-sans tracking-wider mb-1.5">Palavra-passe de Acesso</label>
+                <input type="password" id="input-senha" required placeholder="Digite a palavra-passe..." 
+                       class="w-full glass-input rounded-lg p-3 text-sm text-white placeholder:text-emerald-700/50">
             </div>
-            <button type="submit" class="w-full bg-kokarteGold hover:bg-kokarteGoldHover text-kokarteBg font-bold py-3 rounded-lg text-sm transition-colors">
+            <div id="tentativas-restantes" class="text-xs text-red-400/70 text-center hidden">
+                Tentativas restantes: <span id="contador-tentativas">5</span>
+            </div>
+            <div id="bloqueio-mensagem" class="text-xs text-red-400/70 text-center hidden">
+                ⚠️ Acesso bloqueado. Aguarde 15 minutos.
+            </div>
+            <button type="submit" class="btn-gold-primary w-full py-3.5 rounded-lg text-sm uppercase tracking-wider">
                 Entrar no Painel
             </button>
         </form>
         <div class="mt-6 text-center">
-            <a href="index.html" class="text-xs text-emerald-300 hover:text-white transition-colors">Voltar ao Website Principal</a>
+            <a href="index.html" class="text-xs text-emerald-300/60 hover:text-white transition-colors font-sans tracking-wider">
+                Voltar ao Website Principal
+            </a>
         </div>
     </div>
 
-    <!-- PAINEL ADMINISTRATIVO (Invisível até fazer login) -->
+    <!-- ==========================================
+    PAINEL ADMINISTRATIVO
+    ========================================== -->
     <div id="painel-admin" class="max-w-4xl mx-auto space-y-8 hidden">
         
-        <!-- Topo do Painel -->
-        <header class="flex justify-between items-center border-b border-kokarteGold/30 pb-4">
+        <!-- Topo -->
+        <header class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-kokarteGold/20 pb-4 fade-in">
             <div>
-                <h1 class="text-xl font-bold text-kokarteGold">Painel de Eventos KOKARTE</h1>
-                <p class="text-xs text-emerald-200/70">Gere os workshops e eventos visíveis no portal do cliente</p>
+                <h1 class="text-xl font-bold text-kokarteGold font-display">Painel de Administração KOKARTE</h1>
+                <p class="text-xs text-emerald-200/60 font-sans tracking-wider">Gere eventos, serviços e conteúdos do portal</p>
             </div>
             <div class="flex gap-3">
-                <a href="index.html" class="text-xs border border-kokarteGold/40 text-kokarteGold hover:bg-kokarteGold/10 px-4 py-2 rounded-lg transition-colors flex items-center">
+                <a href="index.html" class="btn-gold-secondary text-xs font-semibold px-4 py-2 rounded-lg">
                     Ver Site
                 </a>
-                <button onclick="fazerLogout()" class="text-xs border border-red-400/40 text-red-300 hover:bg-red-950/40 px-4 py-2 rounded-lg transition-colors">
+                <button onclick="fazerLogout()" class="btn-danger text-xs font-semibold px-4 py-2 rounded-lg">
                     Sair
                 </button>
             </div>
         </header>
 
-        <!-- Formulário de Criar/Editar Evento -->
-        <section class="bg-kokarteCard p-6 rounded-2xl border border-emerald-800/60 shadow-lg">
-            <h2 id="form-titulo" class="text-sm font-bold uppercase tracking-wider text-kokarteGold mb-4">✨ Adicionar Novo Evento</h2>
-            
-            <form id="form-evento" onsubmit="guardarEvento(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Campo escondido para saber se estamos a editar um evento existente -->
-                <input type="hidden" id="evento-id">
-                
-                <div class="md:col-span-2">
-                    <label class="block text-xs text-emerald-200/80 mb-1">Título do Evento / Workshop</label>
-                    <input type="text" id="evento-titulo" required placeholder="Ex: Workshop de Cristais de Proteção" class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold">
-                </div>
-
-                <div>
-                    <label class="block text-xs text-emerald-200/80 mb-1">Data e Hora</label>
-                    <input type="text" id="evento-data" required placeholder="Ex: 15 de Setembro, 18:30" class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold">
-                </div>
-
-                <div>
-                    <label class="block text-xs text-emerald-200/80 mb-1">Local</label>
-                    <input type="text" id="evento-local" required placeholder="Ex: Loja KOKARTE / Online" class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold">
-                </div>
-
-                <div class="md:col-span-2">
-                    <label class="block text-xs text-emerald-200/80 mb-1">Descrição Breve (Para a página principal)</label>
-                    <textarea id="evento-descricao-breve" rows="2" placeholder="Resumo curto de 1 a 2 linhas para cativar a atenção..." class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold"></textarea>
-                </div>
-
-                <div class="md:col-span-2">
-                    <label class="block text-xs text-emerald-200/80 mb-1">Descrição Completa (Para a página do evento)</label>
-                    <textarea id="evento-descricao-completa" rows="4" placeholder="Todos os detalhes, programa completo, o que trazer, regras, etc..." class="w-full bg-kokarteBg border border-emerald-900 rounded-lg p-2.5 text-sm text-white focus:outline-none focus:border-kokarteGold"></textarea>
-                </div>
-
-                <!-- 📷 UPLOAD DE IMAGEM DA GALERIA DO TELEMÓVEL -->
-                <div class="md:col-span-2">
-                    <label class="block text-xs text-emerald-200/80 mb-1">Imagem do Evento (Opcional - Escolher da Galeria)</label>
-                    <div class="flex items-center gap-4">
-                        <input type="file" id="evento-imagem" accept="image/*" class="flex-1 bg-kokarteBg border border-emerald-900 rounded-lg p-2 text-xs text-emerald-100 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-kokarteGold file:text-kokarteBg hover:file:bg-kokarteGoldHover cursor-pointer">
-                        <!-- Preview da imagem em ponto pequeno -->
-                        <div id="imagem-preview-container" class="hidden w-12 h-12 rounded bg-kokarteBg border border-kokarteGold/40 overflow-hidden flex-shrink-0">
-                            <img id="imagem-preview" src="" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <!-- Campo escondido para guardar o Base64 da imagem gerada pelo JS -->
-                    <input type="hidden" id="evento-imagem-base64">
-                </div>
-
-                <div class="flex items-center space-x-2 md:col-span-2 mt-2">
-                    <input type="checkbox" id="evento-ativo" checked class="w-4 h-4 accent-kokarteGold rounded cursor-pointer">
-                    <label for="evento-ativo" class="text-xs text-emerald-200 cursor-pointer">Visível no Website (Ativo)</label>
-                </div>
-
-                <div class="md:col-span-2 flex space-x-3 pt-4">
-                    <button type="submit" class="flex-1 bg-kokarteGold hover:bg-kokarteGoldHover text-kokarteBg font-bold py-3 rounded-lg text-xs uppercase tracking-wider transition-colors shadow-lg">
-                        Guardar Evento
-                    </button>
-                    <button type="button" onclick="limparFormulario()" class="bg-kokarteBg border border-emerald-800 text-emerald-300 px-6 py-3 rounded-lg text-xs hover:bg-emerald-950 transition-colors">
-                        Cancelar / Limpar
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <!-- Lista de Eventos Cadastrados -->
-        <section class="space-y-4 pb-12">
-            <h2 class="text-sm font-bold uppercase tracking-wider text-kokarteGold">Lista de Eventos Guardados</h2>
-            <div id="tabela-eventos" class="space-y-3">
-                <!-- Inserido dinamicamente pelo JavaScript -->
+        <!-- ==========================================
+        TABS: EVENTOS | SERVIÇOS
+        ========================================== -->
+        <div class="border-b border-kokarteGold/20">
+            <div class="flex gap-1 overflow-x-auto">
+                <button class="tab-btn active" data-tab="tab-eventos" onclick="mudarTab('tab-eventos')">
+                    📅 Eventos
+                </button>
+                <button class="tab-btn" data-tab="tab-servicos" onclick="mudarTab('tab-servicos')">
+                    ✨ Serviços
+                </button>
             </div>
-        </section>
+        </div>
+
+        <!-- ==========================================
+        TAB: EVENTOS
+        ========================================== -->
+        <div id="tab-eventos" class="tab-content active space-y-6">
+            
+            <!-- Formulário Eventos -->
+            <section class="glass-premium p-6 rounded-2xl">
+                <h2 id="form-titulo-evento" class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans mb-4">
+                    ✨ Adicionar Novo Evento
+                </h2>
+                
+                <form id="form-evento" onsubmit="guardarEvento(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="hidden" id="evento-id">
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Título do Evento / Workshop</label>
+                        <input type="text" id="evento-titulo" required placeholder="Ex: Workshop de Cristais de Proteção" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Data e Hora</label>
+                        <input type="text" id="evento-data" required placeholder="Ex: 15 de Setembro, 18:30" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Local</label>
+                        <input type="text" id="evento-local" required placeholder="Ex: Loja KOKARTE / Online" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Descrição Breve <span class="text-emerald-500/50">(aparece no index.html)</span></label>
+                        <textarea id="evento-descricao-breve" rows="2" placeholder="Resumo curto de 1 a 2 linhas..." 
+                                  class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50 resize-none"></textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Descrição Completa <span class="text-emerald-500/50">(aparece em eventos.html)</span></label>
+                        <textarea id="evento-descricao-completa" rows="4" placeholder="Todos os detalhes, programa completo..." 
+                                  class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50 resize-none"></textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Imagem do Evento <span class="text-emerald-500/50">(Opcional)</span></label>
+                        <div class="flex items-center gap-4">
+                            <input type="file" id="evento-imagem" accept="image/*" 
+                                   class="flex-1 glass-input rounded-lg p-2 text-xs text-emerald-100 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-kokarteGold file:text-kokarteBg hover:file:bg-kokarteGoldHover cursor-pointer">
+                            <div id="evento-imagem-preview-container" class="hidden w-12 h-12 rounded-lg bg-kokarteBg border border-kokarteGold/30 overflow-hidden flex-shrink-0">
+                                <img id="evento-imagem-preview" src="" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <input type="hidden" id="evento-imagem-base64">
+                    </div>
+
+                    <div class="flex items-center space-x-2 md:col-span-2 mt-2">
+                        <input type="checkbox" id="evento-ativo" checked class="w-4 h-4 accent-kokarteGold rounded cursor-pointer">
+                        <label for="evento-ativo" class="text-xs text-emerald-200/70 font-sans cursor-pointer">Visível no Website (Ativo)</label>
+                    </div>
+
+                    <div class="md:col-span-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
+                        <button type="submit" class="btn-gold-primary flex-1 py-3 rounded-lg text-xs uppercase tracking-wider">
+                            Guardar Evento
+                        </button>
+                        <button type="button" onclick="limparFormularioEvento()" 
+                                class="btn-gold-secondary px-6 py-3 rounded-lg text-xs uppercase tracking-wider">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Lista Eventos -->
+            <section class="space-y-4 pb-4">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans">Lista de Eventos Guardados</h2>
+                <div class="divider-gold"></div>
+                <div id="tabela-eventos" class="space-y-3">
+                    <!-- Inserido dinamicamente pelo JavaScript -->
+                </div>
+            </section>
+        </div>
+
+        <!-- ==========================================
+        TAB: SERVIÇOS
+        ========================================== -->
+        <div id="tab-servicos" class="tab-content space-y-6">
+            
+            <!-- Formulário Serviços -->
+            <section class="glass-premium p-6 rounded-2xl">
+                <h2 id="form-titulo-servico" class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans mb-4">
+                    ✨ Adicionar Novo Serviço
+                </h2>
+                
+                <form id="form-servico" onsubmit="guardarServico(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="hidden" id="servico-id">
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Título do Serviço</label>
+                        <input type="text" id="servico-titulo" required placeholder="Ex: Consulta de Mapeamento Energético" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Duração</label>
+                        <input type="text" id="servico-duracao" required placeholder="Ex: 60 minutos" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Valor / Investimento</label>
+                        <input type="text" id="servico-valor" required placeholder="Ex: 45.000 Kz" 
+                               class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">
+                            📱 Descrição Breve <span class="text-emerald-500/50">(aparece no index.html — máximo 2-3 linhas)</span>
+                        </label>
+                        <textarea id="servico-descricao-breve" rows="2" required placeholder="Resumo curto e cativante para a página principal..." 
+                                  class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50 resize-none"></textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">
+                            📄 Descrição Completa <span class="text-emerald-500/50">(aparece em servicos.html — pode ser longa e detalhada)</span>
+                        </label>
+                        <textarea id="servico-descricao-completa" rows="5" required placeholder="Todos os detalhes, benefícios, informações completas..." 
+                                  class="w-full glass-input rounded-lg p-2.5 text-sm text-white placeholder:text-emerald-700/50 resize-none"></textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Imagem do Serviço <span class="text-emerald-500/50">(Opcional)</span></label>
+                        <div class="flex items-center gap-4">
+                            <input type="file" id="servico-imagem" accept="image/*" 
+                                   class="flex-1 glass-input rounded-lg p-2 text-xs text-emerald-100 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-kokarteGold file:text-kokarteBg hover:file:bg-kokarteGoldHover cursor-pointer">
+                            <div id="servico-imagem-preview-container" class="hidden w-12 h-12 rounded-lg bg-kokarteBg border border-kokarteGold/30 overflow-hidden flex-shrink-0">
+                                <img id="servico-imagem-preview" src="" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <input type="hidden" id="servico-imagem-base64">
+                    </div>
+
+                    <div class="flex items-center space-x-2 md:col-span-2 mt-2">
+                        <input type="checkbox" id="servico-ativo" checked class="w-4 h-4 accent-kokarteGold rounded cursor-pointer">
+                        <label for="servico-ativo" class="text-xs text-emerald-200/70 font-sans cursor-pointer">Visível no Website (Ativo)</label>
+                    </div>
+
+                    <div class="md:col-span-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
+                        <button type="submit" class="btn-gold-primary flex-1 py-3 rounded-lg text-xs uppercase tracking-wider">
+                            Guardar Serviço
+                        </button>
+                        <button type="button" onclick="limparFormularioServico()" 
+                                class="btn-gold-secondary px-6 py-3 rounded-lg text-xs uppercase tracking-wider">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Lista Serviços -->
+            <section class="space-y-4 pb-12">
+                <h2 class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans">Lista de Serviços Guardados</h2>
+                <div class="divider-gold"></div>
+                <div id="tabela-servicos" class="space-y-3">
+                    <!-- Inserido dinamicamente pelo JavaScript -->
+                </div>
+            </section>
+        </div>
 
     </div>
 
-    <!-- Script dedicado ao painel administrativo -->
     <script src="js/admin.js"></script>
 </body>
 </html>

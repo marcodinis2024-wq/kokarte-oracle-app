@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos KOKARTE</title>
+    
+    <!-- Google Fonts Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -15,61 +21,155 @@
                         kokarteCard: '#1d382b',
                         kokarteGold: '#D4AF37',
                         kokarteGoldHover: '#E5C158',
+                        kokarteGoldLight: '#F0D080',
                         kokarteText: '#E8F1EC'
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Lora', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-card {
-            background: rgba(29, 56, 43, 0.9);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+        /* ============================================
+           GLASSMORPHISM PREMIUM
+        ============================================ */
+        .glass-premium {
+            background: rgba(29, 56, 43, 0.88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .glass-premium:hover {
+            border-color: rgba(212, 175, 55, 0.35);
+            box-shadow: 0 24px 72px rgba(0, 0, 0, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           BOTÕES PREMIUM
+        ============================================ */
+        .btn-gold-primary {
+            background: linear-gradient(145deg, #D4AF37, #B8952E);
+            color: #0f2017;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold-primary:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.08);
+        }
+
+        .btn-gold-secondary {
+            background: transparent;
+            color: #D4AF37;
+            border: 2px solid #D4AF37;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold-secondary:hover {
+            background: #D4AF37;
+            color: #0f2017;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25);
+        }
+
+        /* ============================================
+           VÍDEO DE FUNDO
+        ============================================ */
+        #background-video {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            pointer-events: none;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 17, 12, 0.50);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           DIVIDER DOURADO
+        ============================================ */
+        .divider-gold {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            margin: 0 auto;
+            opacity: 0.5;
+        }
+
+        /* ============================================
+           ANIMAÇÕES
+        ============================================ */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+
+        /* ============================================
+           SCROLLBAR
+        ============================================ */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f2017; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-kokarteBg text-kokarteText min-h-screen font-sans">
+<body class="bg-kokarteBg text-kokarteText min-h-screen font-body">
 
-    <div id="vanta-bg" class="fixed inset-0 z-0 pointer-events-none"></div>
+    <!-- Vídeo de Fundo -->
+    <video id="background-video" autoplay muted loop playsinline preload="auto">
+        <source src="fundomotion.mp4" type="video/mp4">
+    </video>
 
     <div class="relative z-10 max-w-md mx-auto p-6 space-y-8">
-        <header class="pt-6">
-            <a href="index.html" class="inline-flex items-center gap-2 text-kokarteGold hover:text-white transition-colors text-sm mb-6">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        
+        <!-- Header -->
+        <header class="pt-6 fade-in">
+            <a href="index.html" class="inline-flex items-center gap-2 text-kokarteGold/70 hover:text-white transition-colors text-sm font-sans tracking-wider mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
                 Voltar ao Portal
             </a>
-            <h1 class="text-3xl font-bold text-kokarteGold">Eventos & Workshops</h1>
-            <p class="text-emerald-100/70 text-sm mt-2">Participe nas nossas experiências presenciais.</p>
+            <h1 class="text-3xl font-bold text-kokarteGold font-display">Eventos & Workshops</h1>
+            <div class="divider-gold my-3"></div>
+            <p class="text-emerald-100/60 text-sm font-body mt-2">Participe nas nossas experiências presenciais.</p>
         </header>
 
-        <div id="lista-eventos-detalhada" class="space-y-6">
+        <!-- Lista de Eventos -->
+        <div id="lista-eventos-detalhada" class="space-y-6 fade-in fade-in-delay-1">
             <!-- Os eventos serão carregados aqui -->
-            <div class="text-center p-10">
-                <p class="text-kokarteGold animate-pulse">A carregar eventos...</p>
+            <div class="text-center p-10 glass-premium rounded-2xl">
+                <p class="text-kokarteGold animate-pulse font-sans text-sm">A carregar eventos...</p>
             </div>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
-    <script>
-        VANTA.FOG({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            highlightColor: 0x2d523e,
-            midtoneColor: 0x1a3829,
-            lowlightColor: 0x0f2117,
-            baseColor: 0x07110c,
-            blurFactor: 0.75,
-            speed: 0.80,
-            zoom: 0.90
-        });
-    </script>
     <script>
         const NUMERO_WHATSAPP = "244936676628";
 
@@ -88,26 +188,28 @@
 
             if (ativos.length === 0) {
                 container.innerHTML = `
-                    <div class="glass-card p-8 rounded-2xl text-center border border-emerald-800/40">
-                        <p class="text-emerald-200/70">Não existem eventos agendados de momento. Fique atenta às nossas redes sociais!</p>
+                    <div class="glass-premium p-8 rounded-2xl text-center">
+                        <p class="text-emerald-200/60 font-body">Não existem eventos agendados de momento. Fique atenta às nossas redes sociais!</p>
                     </div>
                 `;
                 return;
             }
 
             container.innerHTML = "";
-            ativos.forEach(evt => {
-                // Lê a descrição completa, se não existir faz fallback para a breve ou normal
+            ativos.forEach((evt, index) => {
                 const textoCompleto = evt.descricaoCompleta || evt.descricaoBreve || evt.descricao || "";
+                const delay = (index + 1) * 0.1;
                 
                 container.innerHTML += `
-                    <div class="glass-card rounded-2xl overflow-hidden border border-emerald-800/50">
+                    <div class="glass-premium rounded-2xl overflow-hidden fade-in" style="animation-delay: ${delay}s">
                         ${evt.imagem ? `<img src="${evt.imagem}" class="w-full h-48 object-cover opacity-90">` : ''}
                         <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">${evt.titulo}</h3>
-                            <p class="text-xs text-kokarteGold font-semibold mb-4 uppercase tracking-wider">📅 ${evt.data} | 📍 ${evt.local}</p>
-                            <p class="text-emerald-50 text-sm leading-relaxed mb-6 whitespace-pre-line">${textoCompleto}</p>
-                            <button onclick="agendarWhatsApp('Evento: ${evt.titulo}')" class="w-full bg-kokarteGold/20 border border-kokarteGold text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg py-3 rounded-xl transition-all font-semibold">
+                            <h3 class="text-xl font-bold text-white font-display mb-2">${evt.titulo}</h3>
+                            <p class="text-xs text-kokarteGold font-semibold mb-4 uppercase tracking-wider font-sans">📅 ${evt.data} | 📍 ${evt.local}</p>
+                            <div class="divider-gold mb-4"></div>
+                            <p class="text-emerald-50 text-sm font-body leading-relaxed mb-6 whitespace-pre-line">${textoCompleto}</p>
+                            <button onclick="agendarWhatsApp('Evento: ${evt.titulo}')" 
+                                    class="btn-gold-primary w-full py-3.5 rounded-xl text-sm uppercase tracking-wider">
                                 Garantir vaga no evento
                             </button>
                         </div>
