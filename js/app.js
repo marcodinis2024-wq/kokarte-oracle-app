@@ -56,23 +56,14 @@ function carregarEventosIniciais() {
     
     // Procura os eventos guardados no LocalStorage com proteção contra erros
     let eventos = [];
-    try {
-        const dadosLocais = localStorage.getItem("kokarte_eventos");
-        eventos = dadosLocais ? JSON.parse(dadosLocais) : [
-            {
-                id: 1,
-                titulo: "Workshop de Cristais de Proteção",
-                data: "15 de Setembro, 18:30",
-                local: "Loja KOKARTE",
-                descricao: "Aprende a limpar e programar as tuas pedras.",
-                ativo: true,
-                imagem: ""
-            }
-        ];
-    } catch (e) {
-        console.error("Erro ao ler eventos do LocalStorage:", e);
-        eventos = [];
-    }
+
+try {
+    const dadosLocais = localStorage.getItem("kokarte_eventos");
+    eventos = dadosLocais ? JSON.parse(dadosLocais) : [];
+} catch (e) {
+    console.error("Erro ao ler eventos do LocalStorage:", e);
+    eventos = [];
+}
 
     const eventosAtivos = eventos.filter(evt => evt.ativo);
 
