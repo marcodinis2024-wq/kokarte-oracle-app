@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOKARTE — Portal Espiritual & Acolhimento</title>
 
-    <!-- Google Fonts Premium -->
+    <!-- Google Fonts Premium (Montserrat + Poppins) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,9 +26,9 @@
                         kokarteText: '#E8F1EC'
                     },
                     fontFamily: {
-                        display: ['Playfair Display', 'serif'],
-                        body: ['Lora', 'serif'],
-                        sans: ['Montserrat', 'sans-serif']
+                        display: ['Montserrat', 'sans-serif'],
+                        body: ['Poppins', 'sans-serif'],
+                        sans: ['Poppins', 'sans-serif']
                     }
                 }
             }
@@ -235,7 +235,7 @@
         }
 
         /* ============================================
-           ENVELOPE — VERSÃO COM IMAGEM (TAMANHO AUMENTADO)
+           ENVELOPE — VERSÃO COM IMAGEM
         ============================================ */
         .envelope {
             position: relative;
@@ -296,7 +296,8 @@
         }
 
         .letter .letter-content {
-            font-family: 'Lora', serif;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
             font-size: 12px;
             color: #3d2c1a;
             line-height: 1.5;
@@ -307,6 +308,15 @@
             overflow: hidden;
             max-height: 100%;
             font-style: italic;
+        }
+
+        .envelope-seal .seal-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: #8B7530;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.2);
+            letter-spacing: 1px;
         }
 
         /* Partículas */
@@ -323,31 +333,96 @@
             30% { opacity: 1; transform: translate(var(--tx), calc(var(--ty) * 0.5)) scale(1.2) rotate(45deg); }
             100% { opacity: 0; transform: translate(calc(var(--tx) * 1.8), calc(var(--ty) * 1.8)) scale(0.2) rotate(90deg); }
         }
-
+.p-6 {
+    padding: 1rem;
+}
         /* ============================================
-           RESPONSIVIDADE
+           RESPONSIVIDADE — ENVELOPE MAIS LARGO + MARGENS REDUZIDAS
         ============================================ */
-      @media (max-width: 480px) {
+        @media (max-width: 480px) {
+    /* ---- ENVELOPE OCUPA 100% DA LARGURA DISPONÍVEL ---- */
     .envelope {
-        width: 300px;
-        height: 210px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 260 / 180;
+        margin: 0 auto;
     }
-    .letter {
-        width: 255px;
-        height: 150px;
-        padding: 14px 18px;
-        bottom: 30px;
-        transform: translateX(-50%) translateY(100px) scale(0.92);
-    }
-    .letter.open {
-        transform: translateX(-50%) translateY(-40px) scale(1);
-    }
-    .letter .letter-content {
-        font-size: 14px;
-        -webkit-line-clamp: 5;
-    }
-} 
 
+    .envelope-image {
+        /* REMOVER o margin-top que estava a deslocar a imagem */
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        margin-top: 0;
+    }
+
+    /* ---- CARTA AJUSTADA PROPORCIONALMENTE ---- */
+    .letter {
+        width: 82%;
+        height: 70%;
+        padding: 6px 10px;
+        bottom: 8%;
+        transform: translateX(-50%) translateY(75%) scale(0.92);
+        border-radius: 6px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+
+    .letter.open {
+        transform: translateX(-50%) translateY(-12%) scale(1);
+        box-shadow: 0 12px 48px rgba(0,0,0,0.25), 0 0 50px rgba(212,175,55,0.12);
+    }
+
+    .letter .letter-content {
+        font-size: clamp(14px, 4vw, 22px);
+        -webkit-line-clamp: 5;
+        line-height: 1.6;
+        padding: 2px;
+    }
+
+    /* ---- ESPAÇAMENTO LATERAL REDUZIDO (8px) ---- */
+    main {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        max-width: 100%;
+    }
+
+    /* ---- CENTRALIZAÇÃO DO ENVELOPE ---- */
+    #envelope-estado {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0 auto;
+        overflow: visible;
+    }
+
+    #oraculo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .glass-premium {
+        padding-left: 10px;
+        padding-right: 10px;
+        overflow: hidden;
+    }
+
+    /* ---- LEGENDA ---- */
+    #envelope-legenda {
+        font-size: 14px;
+        margin-top: 0px;
+    }
+    #envelope-sublegenda {
+        font-size: 12px;
+        margin-bottom: 0px;
+    }
+}
         /* ============================================
            OVERRIDES
         ============================================ */
@@ -423,7 +498,7 @@
                     <div id="envelope-estado" class="relative flex flex-col items-center justify-center py-4">
 
                         <div class="envelope" id="envelope" onclick="abrirCarta()">
-                            <img src="cartasemfundo.png" alt="Envelope KOKARTE" id="envelope-img" class="envelope-image">
+                            <img src="cartasemfundo2.png" alt="Envelope KOKARTE" id="envelope-img" class="envelope-image">
                             <div class="letter" id="carta">
                                 <div class="letter-content" id="carta-conteudo">"A carregar..."</div>
                             </div>
