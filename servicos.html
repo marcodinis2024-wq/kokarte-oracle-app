@@ -54,7 +54,7 @@
         }
 
         /* ============================================
-           BOTÕES — ESTILOS UNIFICADOS (iguais ao index)
+           BOTÕES — ESTILOS UNIFICADOS
         ============================================ */
         .btn-gold-primary {
             background: linear-gradient(145deg, #D4AF37, #B8952E);
@@ -169,7 +169,7 @@
         }
     </style>
 </head>
-<body class="text-kokarteText min-h-screen font-body overflow-x-hidden">
+<body class="text-kokarteText min-h-screen font-sans overflow-x-hidden">
 
     <!-- Vídeo de Fundo -->
     <video id="background-video" autoplay muted loop playsinline preload="auto">
@@ -188,7 +188,7 @@
             </a>
             <h1 class="text-3xl font-bold text-kokarteGold font-display">Nossos Serviços</h1>
             <div class="divider-gold my-3"></div>
-            <p class="text-emerald-100/60 text-sm font-body mt-2">Escolha o atendimento que melhor ressoa com o seu momento.</p>
+            <p class="text-emerald-100/60 text-sm font-sans mt-2">Escolha o atendimento que melhor ressoa com o seu momento.</p>
         </header>
 
         <!-- Lista de Serviços (dinâmica) -->
@@ -216,7 +216,7 @@
                 console.error('Erro ao ler serviços:', e);
             }
             
-            // Fallback: serviços iniciais (caso não haja dados)
+            // Fallback: serviços iniciais
             return [
                 {
                     id: 1001,
@@ -284,7 +284,7 @@
             if (ativos.length === 0) {
                 container.innerHTML = `
                     <div class="glass-premium p-8 rounded-2xl text-center">
-                        <p class="text-emerald-200/60 font-body">Não existem serviços disponíveis de momento. Volte em breve!</p>
+                        <p class="text-emerald-200/60 font-sans">Não existem serviços disponíveis de momento. Volte em breve!</p>
                     </div>
                 `;
                 return;
@@ -303,21 +303,20 @@
                         <div class="grid grid-cols-2 gap-3 mb-4">
                             <div class="badge-detail">
                                 <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider font-sans">Duração</p>
-                                <p class="text-sm font-semibold text-white font-body">${s.duracao}</p>
+                                <p class="text-sm font-semibold text-white font-sans">${s.duracao}</p>
                             </div>
                             <div class="badge-detail">
                                 <p class="text-[10px] uppercase text-kokarteGold font-bold tracking-wider font-sans">Valor</p>
-                                <p class="text-sm font-semibold text-white font-body">${s.valor}</p>
+                                <p class="text-sm font-semibold text-white font-sans">${s.valor}</p>
                             </div>
                         </div>
 
-                        <p id="desc-${s.id}" class="text-emerald-50 text-sm font-body leading-relaxed mb-2 text-collapsed transition-all duration-300">
+                        <p id="desc-${s.id}" class="text-emerald-50 text-sm font-sans leading-relaxed mb-2 text-collapsed transition-all duration-300">
                             ${descricao.replace(/\n/g, '<br>')}
                         </p>
                         <button onclick="toggleText(this, 'desc-${s.id}')" class="text-kokarteGold text-xs font-bold font-sans tracking-wider underline mb-4 hover:text-kokarteGoldLight transition-colors">
                             Ver mais
                         </button>
-                        <!-- Botão agora com rounded-full e Montserrat garantido -->
                         <button onclick="agendarWhatsApp('${s.titulo}')" 
                                 class="btn-gold-primary">
                             Agendar / Saber Mais
@@ -328,7 +327,7 @@
         }
 
         // ============================================================
-        // TOGGLE TEXTO (expandir/colapsar)
+        // TOGGLE TEXTO
         // ============================================================
         function toggleText(btn, elementId) {
             const p = document.getElementById(elementId);
@@ -351,7 +350,7 @@
         // WHATSAPP
         // ============================================================
         function agendarWhatsApp(nomeItem) {
-            const mensagem = `Olá! Gostaria de agendar : *${nomeItem}*.`;
+            const mensagem = `Olá! Gostaria de agendar: *${nomeItem}*.`;
             const urlWhatsApp = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
             window.open(urlWhatsApp, "_blank");
         }

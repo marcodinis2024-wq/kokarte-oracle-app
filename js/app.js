@@ -13,8 +13,7 @@ let podeAbrir = true;
 const envelopeEstado = document.getElementById('envelope-estado');
 const cartaoEstado = document.getElementById('cartao-estado');
 const envelope = document.getElementById('envelope');
-const envelopeFlap = document.getElementById('envelope-flap');
-const envelopeSeal = document.getElementById('envelope-seal');
+const envelopeImg = document.getElementById('envelope-img');
 const carta = document.getElementById('carta');
 const cartaConteudo = document.getElementById('carta-conteudo');
 const oraculoTexto = document.getElementById('oraculo-texto');
@@ -42,69 +41,57 @@ function carregarOraculo() {
     podeAbrir = true;
     envelopeEstado.classList.remove('hidden');
     cartaoEstado.classList.add('hidden');
-    envelopeSeal.classList.remove('broken');
-    envelopeFlap.style.transform = 'rotateX(0deg)';
     carta.classList.remove('open');
     legenda.style.opacity = '1';
     sublegenda.style.opacity = '1';
     envelope.style.opacity = '1';
     envelope.style.transform = 'scale(1)';
+    envelope.classList.remove('abrindo');
+    if (envelopeImg) {
+        envelopeImg.style.opacity = '1';
+        envelopeImg.style.transform = 'scale(1) rotate(0deg)';
+    }
     particulasContainer.innerHTML = '';
-    envelopeSeal.style.pointerEvents = 'auto';
+    envelope.style.pointerEvents = 'auto';
 }
 
 // ============================================================
-// 2. ABRIR CARTA (acionado pelo clique no selo)
+// 2. ABRIR CARTA (acionado pelo clique no envelope)
 // ============================================================
 function abrirCarta() {
     if (estadoCarta !== 'fechada' || !podeAbrir) return;
     
     estadoCarta = 'abrindo';
     podeAbrir = false;
-    envelopeSeal.style.pointerEvents = 'none';
+    envelope.style.pointerEvents = 'none';
     
-    // Passo 1: Selo parte
-    envelopeSeal.classList.add('broken');
+    // Passo 1: Inicia animação da imagem (encolhe + desvanece)
+    envelope.classList.add('abrindo');
     
-    // Passo 2: Aba abre
-    setTimeout(() => {
-        envelopeFlap.style.transform = 'rotateX(-180deg)';
-        envelopeFlap.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-    }, 250);
-    
-    // Passo 3: Carta sobe
+    // Passo 2: Carta sobe (após pequeno delay)
     setTimeout(() => {
         carta.classList.add('open');
-    }, 550);
+    }, 400);
     
-    // Passo 4: Partículas douradas
+    // Passo 3: Partículas douradas
     setTimeout(() => {
         criarParticulas();
-    }, 850);
+    }, 600);
     
-    // Passo 5: Envelope desvanece
+    // Passo 4: Esconde o envelope e mostra o cartão
     setTimeout(() => {
-        envelope.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        envelope.style.opacity = '0';
-        envelope.style.transform = 'scale(0.92)';
-        legenda.style.transition = 'opacity 0.4s ease';
-        legenda.style.opacity = '0';
-        sublegenda.style.transition = 'opacity 0.4s ease';
-        sublegenda.style.opacity = '0';
-    }, 1250);
-    
-    // Passo 6: Mostra o cartão
-    setTimeout(() => {
+        envelope.style.display = 'none';
         envelopeEstado.classList.add('hidden');
         cartaoEstado.classList.remove('hidden');
         estadoCarta = 'aberta';
         podeAbrir = true;
-        envelopeSeal.style.pointerEvents = 'auto';
+        envelope.style.pointerEvents = 'auto';
         
+        // Reset da imagem para futuras aberturas (será restaurada em fecharCarta)
         if (typeof AOS !== 'undefined') {
             AOS.refresh();
         }
-    }, 1700);
+    }, 1200);
 }
 
 // ============================================================
@@ -119,31 +106,37 @@ function fecharCarta() {
     // Esconde o cartão
     cartaoEstado.classList.add('hidden');
     
-    // Mostra o envelope
+    // Mostra o envelope novamente
     envelopeEstado.classList.remove('hidden');
+    envelope.style.display = 'block';
+    envelope.classList.remove('abrindo');
     
+    // Restaura a imagem ao estado original
+    if (envelopeImg) {
+        envelopeImg.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        envelopeImg.style.opacity = '1';
+        envelopeImg.style.transform = 'scale(1) rotate(0deg)';
+        envelopeImg.style.filter = 'drop-shadow(0 8px 30px rgba(0, 0, 0, 0.3))';
+    }
+    
+    // Carta desce
+    carta.classList.remove('open');
+    
+    // Restaura legenda
+    legenda.style.transition = 'opacity 0.5s ease';
+    legenda.style.opacity = '1';
+    sublegenda.style.transition = 'opacity 0.5s ease';
+    sublegenda.style.opacity = '1';
+    
+    // Remove partículas
+    particulasContainer.innerHTML = '';
+    
+    // Aguarda e volta ao estado fechado
     setTimeout(() => {
-        envelope.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        envelope.style.opacity = '1';
-        envelope.style.transform = 'scale(1)';
-        legenda.style.transition = 'opacity 0.5s ease';
-        legenda.style.opacity = '1';
-        sublegenda.style.transition = 'opacity 0.5s ease';
-        sublegenda.style.opacity = '1';
-        
-        carta.classList.remove('open');
-        envelopeFlap.style.transform = 'rotateX(0deg)';
-        envelopeFlap.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        
-        envelopeSeal.classList.remove('broken');
-        envelopeSeal.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        
-        particulasContainer.innerHTML = '';
-        envelopeSeal.style.pointerEvents = 'auto';
-        
         estadoCarta = 'fechada';
         podeAbrir = true;
-    }, 300);
+        envelope.style.pointerEvents = 'auto';
+    }, 400);
 }
 
 // ============================================================
@@ -170,19 +163,22 @@ function tirarNovaMensagem() {
         cartaConteudo.innerText = `"${mensagemAtual}"`;
         oraculoTexto.innerText = `"${mensagemAtual}"`;
         
+        // Garante que o envelope está visível e fechado
         envelopeEstado.classList.remove('hidden');
         cartaoEstado.classList.add('hidden');
-        envelope.style.opacity = '1';
-        envelope.style.transform = 'scale(1)';
+        envelope.style.display = 'block';
+        envelope.classList.remove('abrindo');
+        if (envelopeImg) {
+            envelopeImg.style.opacity = '1';
+            envelopeImg.style.transform = 'scale(1) rotate(0deg)';
+        }
         legenda.style.opacity = '1';
         sublegenda.style.opacity = '1';
         carta.classList.remove('open');
-        envelopeFlap.style.transform = 'rotateX(0deg)';
-        envelopeSeal.classList.remove('broken');
-        envelopeSeal.style.pointerEvents = 'auto';
         particulasContainer.innerHTML = '';
         estadoCarta = 'fechada';
         podeAbrir = true;
+        envelope.style.pointerEvents = 'auto';
     }
 }
 
