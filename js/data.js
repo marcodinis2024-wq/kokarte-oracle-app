@@ -4,100 +4,95 @@
 
 // As mensagens do oráculo permanecem fixas (não precisam de ser editadas)
 const ORACULO_MENSAGENS = [
-    // --- MENSAGENS ESPECIAIS (FRASES DA TUA IRMÃ - POSIÇÕES 1 A 20) ---
-    "Tens tentado fazer tudo certo, agradar toda a gente e evitar conflitos. Mas, no meio desse esforço, foste-te afastando de ti. Hoje faz uma pausa e pergunta-te uma coisa muito simples: “O que é que eu preciso?” Talvez seja a primeira vez, em muito tempo, que te permites ouvir essa resposta.",
-    "Nem tudo o que te preocupa merece ocupar tanto espaço dentro de ti. Há pensamentos que se repetem tantas vezes que acabam por parecer verdade. Nem sempre são. Antes de continuares a alimentar esse peso, pergunta-te se ele pertence ao presente ou apenas a um medo antigo.",
-    "Há pessoas que entram na nossa vida para caminhar ao nosso lado. Outras entram apenas para nos ensinar. Não confundas uma lição com um lugar onde tens de permanecer.",
-    "Tens esperado sentir-te preparada para dar o próximo passo. Mas talvez nunca exista esse momento perfeito. Há caminhos que só se revelam quando começamos a andar.",
-    "Hoje não te cobres tanto. Nem todos os dias são feitos para produzir, resolver ou conquistar. Alguns existem apenas para recuperar a energia que tens vindo a gastar sem perceber.",
-    "Se continuas a voltar ao mesmo problema, talvez a vida não esteja a castigar-te. Talvez esteja apenas a mostrar-te uma lição que ainda não olhaste de frente.",
-    "Nem tudo o que dói precisa de ser consertado imediatamente. Há feridas que cicatrizam melhor quando deixamos de lhes tocar todos os dias.",
-    "Às vezes dizes “está tudo bem” tantas vezes que acabas por acreditar nisso. Hoje permite-te ser honesta contigo. Não precisas de estar sempre forte.",
-    "Há uma diferença entre insistir e respeitar o teu próprio tempo. Nem sempre desistir significa perder. Às vezes significa escolher a tua paz.",
-    "Se sentes que estás perdida, talvez não estejas. Talvez estejas apenas numa fase em que a tua vida já não combina com a pessoa que eras, mas ainda está a construir a pessoa que vais ser.",
-    "Há uma conversa que tens evitado. Seja contigo ou com outra pessoa. Quanto mais a adias, mais espaço ela ocupa dentro de ti. Talvez hoje seja um bom dia para começar.",
-    "Não tenhas medo de mudar de opinião. Crescer também é reconhecer que aquilo que fazia sentido ontem já não representa quem és hoje.",
-    "Nem toda a gente vai compreender as decisões que estás a tomar. E está tudo bem. Nem todos conhecem a batalha que travaste para chegar até aqui.",
-    "Talvez estejas tão focada naquilo que ainda falta que já não consegues ver tudo o que conseguiste construir. Respira. Olha para trás por um instante. Dá valor ao caminho que já percorreste.",
-    "Se tens sentido vontade de recomeçar, não ignores esse impulso. Há fases da vida em que permanecer no mesmo lugar dói mais do que mudar.",
-    "Não confundas paz com ausência de problemas. Paz é conseguires continuar a caminhar sem deixares que tudo o que acontece à tua volta determine aquilo que sentes por dentro.",
-    "Hoje experimenta fazer menos uma coisa por obrigação e mais uma coisa por ti. Pequenas escolhas repetidas todos os dias acabam por transformar uma vida inteira.",
-    "Há momentos em que procuramos respostas em toda a parte. Mas talvez a resposta que precisas esteja escondida na pergunta que tens medo de fazer a ti própria.",
-    "Não desperdices energia a tentar convencer alguém do teu valor. Quem precisa de provas para te reconhecer dificilmente saberá cuidar daquilo que és.",
-    "Se hoje sentes que nada está a acontecer, lembra-te de que as maiores mudanças raramente começam por fora. Primeiro reorganizam-se dentro de nós. Só depois começam a aparecer no mundo.",
+    "Tens tentado fazer tudo certo, agradar toda a gente e evitar conflitos. Mas, no meio desse esforço, foste-te afastando de ti. Hoje faz uma pausa e pergunta-te uma coisa muito simples: 'O que é que eu preciso?' Talvez seja a primeira vez, em muito tempo, que te permites ouvir essa resposta.",
 
-    // --- MENSAGENS COMPLEMENTARES DE ELEVAÇÃO E CRISTAIS ---
-    "Mesmo quando a tempestade parece longa, as tuas raízes estão a ficar mais fortes. Respira fundo: o sol da KOKARTE está a voltar a brilhar na tua vida.",
-    "Tudo o que enfrentaste até aqui não veio para te parar, mas para te revelar a força imensa que carregas. Confia no processo da tua cura.",
-    "O universo não erra o momento. Se estás a ler isto hoje, é porque a tua energia está pronta para libertar o passado e abraçar uma nova fase de prosperidade.",
-    "A dor que sentiste no passado foi a preparação para a bênção que estás prestes a receber. Mantém o teu coração aberto e a tua intuição desperta.",
-    "Ultrapassar momentos difíceis é a arte de transformar pedras em degraus. Estás mais perto da tua vitória do que imaginas.",
-    "Permite-te desacelerar. O teu valor não está na pressa, mas na paz com que acolhes a tua própria jornada espiritual.",
-    "Quando tudo parecer incerto, confia na sabedoria do silêncio. Um novo ciclo de clareza e luz está a começar para ti.",
-    "A tua porta espiritual abre-se quando deixas de alimentar o medo e começas a confiar na luz que habita dentro de ti.",
-    "Cada cristal guarda uma vibração única. Escolhe aquele que faz o teu coração sentir paz e deixa a sua energia acompanhar o teu caminho.",
-    "Nem todas as respostas chegam de imediato. Algumas revelam-se quando a tua energia encontra o equilíbrio certo.",
-    "O universo envia sinais todos os dias. Mantém a tua mente aberta e a tua intuição desperta.",
-    "A ametista recorda-te que a serenidade é uma força poderosa. Respira fundo e permite que a paz te envolva.",
-    "Quando limpas a energia da tua casa, também crias espaço para novas oportunidades entrarem na tua vida.",
-    "Há portas espirituais que só se abrem quando deixas para trás aquilo que já não faz parte do teu destino.",
-    "Confia na energia do momento presente. É nele que começam todas as grandes transformações.",
-    "O quartzo transparente amplifica a tua intenção. Escolhe pensamentos de luz e deixa-os florescer.",
-    "A tua alma conhece o caminho, mesmo quando a tua mente está cheia de dúvidas.",
-    "Toda a energia que ofereces ao mundo regressa até ti multiplicada. Espalha luz sempre que puderes.",
-    "Os cristais não mudam o teu destino; ajudam-te a recordar o poder que sempre existiu dentro de ti.",
-    "A verdadeira prosperidade nasce quando o teu coração vibra em gratidão.",
-    "A tua porta espiritual fortalece-se sempre que escolhes o amor em vez do medo.",
-    "O universo trabalha em silêncio enquanto prepara a tua próxima vitória.",
-    "Quando um ciclo termina, outro começa com possibilidades ainda maiores. Recebe essa mudança com confiança.",
-    "A energia da lua convida-te a libertar o peso do passado e a renovar a tua essência.",
-    "Cada passo consciente aproxima-te da versão mais luminosa de ti.",
-    "Nem toda a batalha precisa de ser travada. Algumas dissolvem-se quando elevas a tua frequência.",
-    "O cristal certo encontra sempre a pessoa certa no momento certo.",
-    "Escuta a tua intuição. Ela fala baixinho, mas nunca se engana.",
-    "A tua luz continua viva, mesmo nos dias em que não a consegues ver.",
-    "Protege a tua energia da mesma forma que proteges o teu coração.",
-    "O universo abre caminhos onde antes só conseguias ver obstáculos.",
-    "Há uma bênção silenciosa a aproximar-se de ti. Mantém a tua fé viva.",
-    "Cada cristal é um lembrete de que a natureza guarda uma sabedoria ancestral.",
-    "A tua energia merece ambientes, pessoas e pensamentos que a façam crescer.",
-    "Hoje pode ser o primeiro dia de uma transformação que vais agradecer no futuro.",
-    "Liberta aquilo que pesa. A tua alma foi feita para voar, não para carregar correntes.",
-    "Quando a tua vibração muda, o mundo à tua volta começa a responder de forma diferente.",
-    "A porta espiritual da abundância abre-se através da gratidão diária.",
-    "O quartzo rosa lembra-te que o amor-próprio é a base de todas as outras formas de amor.",
-    "O equilíbrio começa quando deixas de lutar contra ti próprio.",
-    "Toda a energia positiva que cultivas torna-se um farol para novas oportunidades.",
-    "A tua essência é mais poderosa do que qualquer dificuldade temporária.",
-    "O universo conhece sonhos que ainda nem tiveste coragem de revelar.",
-    "A paz interior é o cristal mais raro que podes cultivar.",
-    "Confia: aquilo que está destinado a ti encontrará sempre o caminho.",
-    "A tua jornada espiritual não exige perfeição, apenas autenticidade.",
-    "Os cristais acompanham-te como símbolos da intenção que colocas em cada novo dia.",
-    "Há momentos em que fechar uma porta é exatamente o que permite abrir outra muito maior.",
-    "A energia da gratidão transforma o comum em extraordinário.",
-    "Permite que a luz substitua o medo e observa a transformação acontecer.",
-    "Cada amanhecer traz consigo uma oportunidade para renovar a tua frequência.",
-    "A tua força espiritual cresce sempre que escolhes continuar, mesmo sem ver o destino.",
-    "A proteção começa quando acreditas no valor da tua própria energia.",
-    "A abundância aproxima-se de quem vibra em amor, esperança e confiança.",
-    "Não subestimes o poder de uma intenção colocada com verdade e coração.",
-    "O universo está constantemente a conspirar para o teu crescimento, mesmo quando não consegues perceber.",
-    "Que esta mensagem seja um sinal de que uma nova porta espiritual está prestes a abrir-se, trazendo paz, equilíbrio, proteção e novas energias para a tua vida.",
-    "Sempre que um cristal chega até ti, é porque a tua alma está pronta para receber uma nova aprendizagem.",
-    "A energia que procuras já vive dentro de ti. Os cristais apenas ajudam a despertá-la.",
-    "A tua intuição é a chave que abre as portas espirituais mais importantes da tua vida.",
-    "Cada desafio remove um bloqueio energético e aproxima-te da tua missão.",
-    "O universo recompensa quem mantém a fé mesmo quando ainda não consegue ver o caminho.",
-    "A luz que procuras nunca esteve longe. Ela sempre brilhou dentro do teu coração.",
-    "Respira profundamente e entrega as tuas preocupações ao universo. A resposta chegará no momento certo.",
-    "O cristal que hoje te chama pode ser exatamente aquele de que a tua energia precisa.",
-    "Nada acontece por acaso. Cada encontro e cada despedida fazem parte da tua evolução espiritual.",
-    "Quando escolhes viver em paz, atrais pessoas e oportunidades com a mesma frequência.",
-    "Confia na proteção divina que acompanha cada passo da tua jornada.",
-    "A tua vibração de hoje determina as oportunidades de amanhã.",
-    "As portas da abundância começam a abrir-se quando libertas o medo da escassez.",
-    "Cada novo amanhecer é uma oportunidade para renovar a tua energia e manifestar os teus sonhos."
+    "Nem tudo o que te preocupa merece ocupar tanto espaço dentro de ti. Há pensamentos que se repetem tantas vezes que acabam por parecer verdade. Nem sempre são. Antes de continuares a alimentar esse peso, pergunta-te se ele pertence ao presente ou apenas a um medo antigo.",
+
+    "Há pessoas que entram na nossa vida para caminhar ao nosso lado. Outras entram apenas para nos ensinar. Não confundas uma lição com um lugar onde tens de permanecer.",
+
+    "Há uma parte de ti que continua à espera de uma desculpa para começar. Espera por mais tempo, mais dinheiro, mais confiança, mais certezas. Mas a vida raramente muda quando tudo está perfeito. Muda quando decidimos dar um passo mesmo sem saber exatamente onde ele nos vai levar. Talvez o momento que tens esperado não esteja à tua frente. Talvez seja este.",
+
+    "Nem tudo o que te tira a paz merece uma resposta. Há pessoas que só conseguem chegar até ti quando reages. Hoje experimenta fazer diferente. Nem todas as batalhas precisam de ser travadas. Algumas terminam simplesmente quando deixas de lhes dar espaço dentro de ti.",
+
+    "Há dias em que sentes que estás a falhar, apenas porque ainda não chegaste onde gostarias. Mas esqueces-te de olhar para tudo aquilo que já ultrapassaste. Não te compares com a meta. Compara-te com a pessoa que eras há um ano. Vais perceber que cresceste mais do que imaginas.",
+
+    "Não carregues a responsabilidade de salvar toda a gente. Há pessoas que só mudam quando decidem fazê-lo por elas próprias. O teu papel nunca foi resolver a vida de todos. O teu papel é cuidar da tua.",
+
+    "Talvez tenhas passado tanto tempo a adaptar-te às expectativas dos outros que já nem saibas distinguir aquilo que realmente desejas. Hoje não procures agradar. Procura apenas ser verdadeira contigo. Essa resposta vale mais do que qualquer aprovação.",
+
+    "Há uma preocupação que te acompanha quase todos os dias. Ela entra contigo quando acordas e continua presente quando te deitas. Mas preocupares-te constantemente não te aproxima da solução. Apenas te afasta da tranquilidade necessária para a encontrares.",
+
+    "Não confundas calma com falta de ambição. Há momentos em que o maior progresso acontece precisamente quando deixamos de correr atrás de tudo ao mesmo tempo. A vida também cresce no silêncio.",
+
+    "Existe algo dentro de ti que já sabe qual é a decisão certa. O problema é que tens pedido opinião a tantas pessoas que deixaste de ouvir a única voz que realmente importa. Antes de procurares mais respostas lá fora, escuta-te.",
+
+    "Nem sempre precisas de explicar porque mudaste. Quem acompanha o teu caminho percebe a tua evolução. Quem exige justificações, muitas vezes, apenas sente dificuldade em aceitar que já não és a mesma pessoa.",
+
+    "Há uma diferença entre desistires de um sonho e mudares de direção. Crescer também significa reconhecer quando um caminho deixou de fazer sentido. Não tenhas medo de escolher outra estrada.",
+
+    "Hoje tenta reparar na forma como falas contigo. Se essas palavras fossem dirigidas a alguém que amas, continuarias a dizê-las? Mereces receber de ti a mesma compreensão que ofereces aos outros.",
+
+    "Por vezes procuramos uma grande mudança, quando aquilo de que realmente precisamos é de pequenas decisões repetidas com consistência. Não subestimes o poder de um hábito que respeita quem queres tornar-te.",
+
+    "Nem tudo o que terminou foi uma perda. Algumas coisas terminaram porque já não conseguiam acompanhar a pessoa em que te estás a transformar. Não olhes apenas para o que ficou para trás. Repara também no espaço que ficou disponível.",
+
+    "Talvez estejas cansada, mas não apenas fisicamente. Há um cansaço que nasce de tentares controlar tudo. Experimenta confiar um pouco mais na vida e um pouco menos na necessidade de prever cada passo.",
+
+    "Existe uma conversa que tens tido contigo em silêncio. Sempre que ela aparece, mudas de assunto, ocupas-te com outras coisas ou convences-te de que não é importante. Mas algumas respostas só aparecem quando deixamos de fugir das perguntas.",
+
+    "Não deixes que um momento difícil te faça acreditar que toda a tua vida está errada. Um capítulo nunca conta a história inteira. Continua a escrever.",
+
+    "Há algo que tens tentado resolver apenas com a mente, quando talvez a resposta não esteja aí. Nem tudo se resolve a pensar mais. Algumas decisões precisam de silêncio, de tempo e de coragem para sentir. Hoje não procures controlar tudo. Experimenta apenas estar presente no momento em que estás.",
+
+    "Nem todas as pessoas vão compreender a tua mudança. Algumas conheceram uma versão tua que já não existe. Não sintas necessidade de voltar atrás só para continuares a ser reconhecida por quem nunca acompanhou o teu crescimento.",
+
+    "Tens um hábito de minimizar as tuas conquistas. Quando algo corre bem, dizes que foi sorte. Quando algo corre mal, assumes toda a culpa. Talvez esteja na altura de começares a olhar para ti com mais justiça.",
+
+    "Há uma parte de ti que continua a acreditar que precisas de merecer descanso. Como se só tivesses o direito de parar depois de resolver tudo. Mas a verdade é que nunca estará tudo resolvido. Cuida de ti antes que o cansaço decida por ti.",
+
+    "Talvez estejas a interpretar este momento como um atraso, quando na realidade é uma preparação. Nem sempre percebemos o motivo das pausas enquanto as estamos a viver. Só mais tarde percebemos que elas evitaram caminhos que não eram para nós.",
+
+    "Não deixes que uma desilusão te convença de que tudo será igual. As pessoas mudam. As circunstâncias mudam. E tu também mudaste. Não carregues o passado para lugares onde ele já não faz sentido.",
+
+    "Há muito tempo que tentas manter tudo equilibrado. A família, o trabalho, as responsabilidades, as emoções. Mas ninguém consegue segurar tudo sem, em algum momento, começar a deixar cair a si próprio. Hoje lembra-te de que também fazes parte da lista de prioridades que tanto tentas cumprir.",
+
+    "Talvez estejas à procura de uma confirmação para aquilo que já decidiste no teu coração. A verdade é que nem sempre ela chega. Há momentos em que a confiança nasce precisamente quando deixamos de esperar que alguém nos diga que estamos certos.",
+
+    "Nem tudo o que te desafia veio para te magoar. Algumas situações aparecem apenas para mostrar uma força tua que ainda não conhecias. Nem sempre a vida pergunta se estás preparada. Às vezes, apenas te mostra que és muito mais capaz do que pensavas.",
+
+    "Hoje presta atenção às pequenas coisas que te fazem sentir viva. Um café sem pressa. Uma conversa sincera. O silêncio da manhã. A felicidade raramente faz barulho.",
+
+    "Há um peso que continuas a carregar apenas porque te habituaste a ele. Já nem perguntas se ainda faz sentido. Talvez hoje seja um bom dia para pousá-lo e perceber que a tua caminhada pode ser mais leve.",
+
+    "Nem toda a distância significa perda. Há pessoas de quem nos afastamos para finalmente conseguirmos voltar a encontrar-nos.",
+
+    "Existe uma diferença entre ser paciente e viver constantemente à espera. Não adies a tua vida enquanto esperas que tudo fique perfeito. Há coisas que só começam quando decides avançar.",
+
+    "Hoje talvez não precises de mudar o mundo. Talvez precises apenas de mudar a forma como olhas para ti. Às vezes é essa a transformação que altera tudo o resto.",
+
+    "Se continuas a pensar tantas vezes na mesma situação, talvez não seja porque ainda não encontraste uma resposta. Talvez seja porque ainda não aceitaste aquela que já conheces.",
+
+    "Não tenhas receio de desapontar algumas pessoas quando a alternativa é continuares a desapontar-te a ti própria. A paz também exige escolhas difíceis.",
+
+    "Há momentos em que a vida parece tirar-nos aquilo que mais queríamos. Só muito mais tarde percebemos que, naquele espaço vazio, nasceu uma versão nossa que nunca teria existido de outra forma.",
+
+    "Olha para a forma como falas dos teus sonhos. Se até tu os tratas como impossíveis, será difícil acreditar neles quando surgirem oportunidades para os concretizar.",
+
+    "Talvez estejas a exigir de ti uma perfeição que nunca exigiste a ninguém que amas. Porque razão és tão compreensiva com os outros e tão dura contigo?",
+
+    "Há uma tranquilidade que chega quando deixamos de querer controlar a opinião dos outros. Nem toda a gente vai gostar de quem és. E isso não diz nada sobre o teu valor.",
+
+    "Hoje permite-te mudar de ideias sem culpa. Crescer também significa deixar para trás certezas que já não fazem sentido.",
+
+    "Há portas que permanecem fechadas não porque te falte capacidade, mas porque ainda estás a insistir em abrir a porta errada. Nem tudo o que desejas é necessariamente aquilo de que precisas.",
+
+    "Talvez estejas a procurar motivação quando aquilo de que realmente precisas é de descanso. Um coração cansado raramente consegue sonhar com clareza.",
+
+    "Existe uma coragem silenciosa que poucas pessoas veem. É aquela que te faz levantar todos os dias, mesmo quando ninguém imagina aquilo que tens enfrentado por dentro. Não desvalorizes essa força.",
+
+    "Não deixes que um dia difícil te faça acreditar que tens uma vida difícil. Há dias que chegam apenas para nos lembrar que somos humanos. Amanhã pode trazer uma perspetiva completamente diferente.",
+
+    "Se esta mensagem chegou até ti hoje, fica apenas com uma ideia: não precisas de resolver toda a tua vida esta semana, nem este mês. Basta continuares a dar passos honestos na direção da pessoa que queres ser. Às vezes, a mudança acontece tão devagar que só nos apercebemos dela quando olhamos para trás e já não reconhecemos a versão antiga de nós mesmos."
 ];
 
 // ============================================================
