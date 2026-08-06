@@ -54,35 +54,62 @@
         }
 
         /* ============================================
-           BOTÕES PREMIUM
+           BOTÕES — ESTILOS UNIFICADOS (iguais ao index)
         ============================================ */
         .btn-gold-primary {
             background: linear-gradient(145deg, #D4AF37, #B8952E);
             color: #0f2017;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: none;
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.35), 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-gold-primary:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.45), 0 4px 16px rgba(0, 0, 0, 0.3);
             filter: brightness(1.08);
         }
+        .btn-gold-primary:active { transform: scale(0.97); }
 
         .btn-gold-secondary {
             background: transparent;
             color: #D4AF37;
-            border: 2px solid #D4AF37;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid #D4AF37;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-gold-secondary:hover {
             background: #D4AF37;
             color: #0f2017;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
         }
+        .btn-gold-secondary:active { transform: scale(0.97); }
 
         /* ============================================
            VÍDEO DE FUNDO
@@ -208,8 +235,9 @@
                             <p class="text-xs text-kokarteGold font-semibold mb-4 uppercase tracking-wider font-sans">📅 ${evt.data} | 📍 ${evt.local}</p>
                             <div class="divider-gold mb-4"></div>
                             <p class="text-emerald-50 text-sm font-body leading-relaxed mb-6 whitespace-pre-line">${textoCompleto}</p>
+                            <!-- Botão agora com rounded-full e Montserrat garantido -->
                             <button onclick="agendarWhatsApp('Evento: ${evt.titulo}')" 
-                                    class="btn-gold-primary w-full py-3.5 rounded-xl text-sm uppercase tracking-wider">
+                                    class="btn-gold-primary">
                                 Garantir vaga no evento
                             </button>
                         </div>

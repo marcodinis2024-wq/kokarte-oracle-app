@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOKARTE — Portal Espiritual & Acolhimento</title>
-    
+
     <!-- Google Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,29 +35,21 @@
         }
     </script>
 
-    <!-- AOS Library (Scrolltelling Animation) -->
+    <!-- AOS Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         /* ============================================
-           ANIMAÇÃO PREMIUM DO LOGÓTIPO
+           ANIMAÇÃO DO LOGÓTIPO
         ============================================ */
         @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0px) scale(1);
-                filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.15));
-            }
-            50% {
-                transform: translateY(-6px) scale(1.02);
-                filter: drop-shadow(0 0 28px rgba(212, 175, 55, 0.35));
-            }
+            0%, 100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.15)); }
+            50% { transform: translateY(-6px) scale(1.02); filter: drop-shadow(0 0 28px rgba(212, 175, 55, 0.35)); }
         }
-        .logo-premium-anim {
-            animation: logoFloat 6s ease-in-out infinite;
-        }
+        .logo-premium-anim { animation: logoFloat 6s ease-in-out infinite; }
 
         /* ============================================
-           LINHA DOURADA ANIMADA (HEADER)
+           LINHA DOURADA ANIMADA
         ============================================ */
         @keyframes goldMove {
             0% { background-position: -200% 0; }
@@ -73,60 +65,93 @@
             box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
             transition: all 0.4s ease;
         }
-        .gold-header-line:hover {
-            box-shadow: 0 0 24px rgba(212, 175, 55, 0.5);
-            height: 3px;
-        }
+        .gold-header-line:hover { box-shadow: 0 0 24px rgba(212, 175, 55, 0.5); height: 3px; }
 
         /* ============================================
-           GLASSMORPHISM — CARTÕES PREMIUM
+           GLASSMORPHISM
         ============================================ */
         .glass-premium {
             background: rgba(29, 56, 43, 0.75);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             border: 1px solid rgba(212, 175, 55, 0.15);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-premium:hover {
             border-color: rgba(212, 175, 55, 0.4);
-            box-shadow: 
-                0 24px 72px rgba(0, 0, 0, 0.6),
-                0 0 40px rgba(212, 175, 55, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            box-shadow: 0 24px 72px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.08);
             transform: translateY(-3px);
         }
 
         /* ============================================
-           BOTÕES PREMIUM
+           BOTÕES — ESTILOS UNIFICADOS E ARREDONDADOS
         ============================================ */
         .btn-gold-primary {
             background: linear-gradient(145deg, #D4AF37, #B8952E);
             color: #0f2017;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: none;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
             box-shadow: 0 8px 32px rgba(212, 175, 55, 0.35), 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-gold-primary:hover {
             transform: translateY(-2px) scale(1.02);
             box-shadow: 0 12px 48px rgba(212, 175, 55, 0.45), 0 4px 16px rgba(0, 0, 0, 0.3);
             filter: brightness(1.08);
         }
-        .btn-gold-primary:active {
-            transform: scale(0.97);
-        }
-
+        .btn-gold-primary:active { transform: scale(0.97); }
+.btn-gold-secondary1 {
+    background: transparent;
+            color: #fcfbfa44;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid #d4af3700;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
+    }
         .btn-gold-secondary {
             background: transparent;
             color: #D4AF37;
-            border: 2px solid #D4AF37;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid #D4AF37;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-gold-secondary:hover {
             background: #D4AF37;
@@ -134,12 +159,35 @@
             transform: translateY(-2px) scale(1.02);
             box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
         }
-        .btn-gold-secondary:active {
-            transform: scale(0.97);
+        .btn-gold-secondary:active { transform: scale(0.97); }
+
+        .btn-tertiary {
+            background: transparent;
+            color: #D4AF37;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid #D4AF37;
+            border-radius: 0.75rem;
+            padding: 0.5rem 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        .btn-tertiary:hover {
+            background: #D4AF37;
+            color: #0f2017;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
         }
 
         /* ============================================
-           SEPARADORES DOURADOS
+           SEPARADORES
         ============================================ */
         .divider-gold {
             width: 60px;
@@ -178,249 +226,226 @@
         }
 
         /* ============================================
-           ANIMAÇÕES DE ENTRADA
+           ENVELOPE — VERSÃO COM VINCOS DESTACADOS
         ============================================ */
-        .fade-in-up {
+        .envelope {
+            position: relative;
+            width: 220px;
+            height: 150px;
+            margin: 0 auto;
+            background: linear-gradient(160deg, #f5efe6 20%, #d4c8b8 80%);
+            border-radius: 4px;
+            border: 2.5px solid #7a6a5a;
+            box-shadow:
+                0 8px 40px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -2px 8px rgba(0, 0, 0, 0.15);
+            transform-origin: center;
+            animation: floatEnvelope 4s ease-in-out infinite;
+            cursor: default;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            z-index: 15;
+        }
+
+        /* Vincos laterais — duas linhas verticais que marcam as dobras */
+        .envelope::before,
+        .envelope::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(120, 100, 80, 0.25);
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .envelope::before {
+            left: 20%;
+            border-left: 1px solid rgba(160, 140, 120, 0.3);
+        }
+        .envelope::after {
+            right: 20%;
+            border-right: 1px solid rgba(160, 140, 120, 0.3);
+        }
+
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .envelope-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(160deg, #ede4d8, #c8b8a8);
+            border-radius: 0 0 4px 4px;
+            border-top: 3px solid #7a6a5a;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            background: linear-gradient(160deg, #f5efe6 30%, #d4c8b8);
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top center;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-bottom: 3px solid #7a6a5a;
+            z-index: 3;
+            backface-visibility: hidden;
+            box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Vinco central da aba — linha que divide a aba ao meio */
+        .envelope-flap::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 1px;
+            background: rgba(140, 120, 100, 0.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            pointer-events: none;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(-180deg);
+            border-bottom: 3px solid #7a6a5a;
+        }
+
+        .envelope-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 54px;
+            height: 54px;
+            background: radial-gradient(circle at 35% 30%, #f0d080, #c9a035);
+            border-radius: 50%;
+            border: 3px solid #b8952E;
+            box-shadow:
+                0 0 25px rgba(212, 175, 55, 0.4),
+                inset 0 -4px 12px rgba(0,0,0,0.2),
+                inset 0 4px 12px rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: pulseSeal 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseSeal {
+            0%, 100% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 -4px 12px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.7), 0 0 80px rgba(212, 175, 55, 0.2), inset 0 -4px 12px rgba(0,0,0,0.2); }
+        }
+
+        .envelope-seal .seal-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: #8B7530;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.2);
+            letter-spacing: 1px;
+        }
+
+        .envelope-seal.broken {
+            animation: none;
+            background: radial-gradient(circle at 35% 30%, #e8c84a, #a08020);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.8), inset 0 -4px 12px rgba(0,0,0,0.3);
+            transform: translate(-50%, -50%) scale(0.85) rotate(-5deg);
+            opacity: 0.7;
+        }
+        .envelope-seal.broken .seal-text { opacity: 0.5; transform: scale(0.8); }
+
+        .letter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px) scale(0.92);
+            width: 190px;
+            height: 110px;
+            background: linear-gradient(160deg, #fcf8f0, #f0ece0);
+            border-radius: 3px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            padding: 12px 16px;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.7s ease-out forwards;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 5;
+            border: 1px solid rgba(180,160,140,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
         }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+        .letter.open {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-30px) scale(1);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.2), 0 0 30px rgba(212,175,55,0.08);
         }
-        .fade-in-up-delay-1 { animation-delay: 0.1s; }
-        .fade-in-up-delay-2 { animation-delay: 0.2s; }
-        .fade-in-up-delay-3 { animation-delay: 0.3s; }
-        .fade-in-up-delay-4 { animation-delay: 0.4s; }
-        .fade-in-up-delay-5 { animation-delay: 0.5s; }
+        .letter .letter-content {
+            font-family: 'Lora', serif;
+            font-size: 11px;
+            color: #3d2c1a;
+            line-height: 1.5;
+            text-align: center;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-height: 100%;
+            font-style: italic;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 0 12px rgba(212,175,55,0.4);
+            animation: particleRise 1.8s ease-out forwards;
+        }
+        @keyframes particleRise {
+            0% { opacity: 0; transform: translate(0, 0) scale(0.3) rotate(0deg); }
+            30% { opacity: 1; transform: translate(var(--tx), calc(var(--ty) * 0.5)) scale(1.2) rotate(45deg); }
+            100% { opacity: 0; transform: translate(calc(var(--tx) * 1.8), calc(var(--ty) * 1.8)) scale(0.2) rotate(90deg); }
+        }
 
         /* ============================================
-           SCROLLBAR PERSONALIZADA
+           RESPONSIVIDADE
+        ============================================ */
+        @media (max-width: 480px) {
+            .envelope { width: 180px; height: 125px; }
+            .envelope-seal { width: 44px; height: 44px; }
+            .envelope-seal .seal-text { font-size: 18px; }
+            .letter { width: 155px; height: 90px; padding: 10px 14px; }
+            .letter .letter-content { font-size: 10px; -webkit-line-clamp: 4; }
+            /* Ajustar vincos laterais para mobile */
+            .envelope::before { left: 15%; }
+            .envelope::after { right: 15%; }
+        }
+
+        /* ============================================
+           OVERRIDES
+        ============================================ */
+        #oraculo-container .hidden { display: none !important; }
+        #envelope-estado { transition: opacity 0.4s ease; }
+
+        /* ============================================
+           SCROLLBAR
         ============================================ */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0f2017; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
-        /* ============================================
-   ENVELOPE E CARTA — ORÁCULO KOKARTE
-   ============================================ */
-
-/* --- Envelope --- */
-.envelope {
-    position: relative;
-    width: 220px;
-    height: 150px;
-    margin: 0 auto;
-    background: linear-gradient(160deg, #f5efe6 20%, #e0d4c4 80%);
-    border-radius: 4px;
-    box-shadow: 
-        0 8px 40px rgba(0,0,0,0.35),
-        inset 0 1px 0 rgba(255,255,255,0.4);
-    transform-origin: center;
-    animation: floatEnvelope 4s ease-in-out infinite;
-    cursor: default;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    z-index: 15;
-}
-
-@keyframes floatEnvelope {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-}
-
-/* Corpo do envelope (parte inferior) */
-.envelope-body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background: linear-gradient(160deg, #ede4d8, #d4c8b8);
-    border-radius: 0 0 4px 4px;
-    border-top: 2px solid rgba(180,160,140,0.3);
-}
-
-/* Aba do envelope (triângulo superior) */
-.envelope-flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 55%;
-    background: linear-gradient(160deg, #f5efe6 30%, #d4c8b8);
-    clip-path: polygon(0 0, 50% 100%, 100% 0);
-    transform-origin: top center;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border-bottom: 2px solid rgba(180,160,140,0.2);
-    z-index: 3;
-    backface-visibility: hidden;
-}
-
-/* Envelope quando aberto (aba virada para cima) */
-.envelope.open .envelope-flap {
-    transform: rotateX(-180deg);
-}
-
-/* --- Selo com logótipo --- */
-.envelope-seal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 54px;
-    height: 54px;
-    background: radial-gradient(circle at 35% 30%, #f0d080, #c9a035);
-    border-radius: 50%;
-    border: 3px solid #b8952E;
-    box-shadow: 
-        0 0 25px rgba(212, 175, 55, 0.4),
-        inset 0 -4px 12px rgba(0,0,0,0.2),
-        inset 0 4px 12px rgba(255,255,255,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    animation: pulseSeal 3s ease-in-out infinite;
-}
-
-@keyframes pulseSeal {
-    0%, 100% { 
-        box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 -4px 12px rgba(0,0,0,0.2);
-    }
-    50% { 
-        box-shadow: 0 0 40px rgba(212, 175, 55, 0.7), 0 0 80px rgba(212, 175, 55, 0.2), inset 0 -4px 12px rgba(0,0,0,0.2);
-    }
-}
-
-.envelope-seal .seal-text {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 22px;
-    color: #8B7530;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.2);
-    letter-spacing: 1px;
-}
-
-/* Selo partido */
-.envelope-seal.broken {
-    animation: none;
-    background: radial-gradient(circle at 35% 30%, #e8c84a, #a08020);
-    box-shadow: 
-        0 0 50px rgba(212, 175, 55, 0.8),
-        inset 0 -4px 12px rgba(0,0,0,0.3);
-    transform: translate(-50%, -50%) scale(0.85) rotate(-5deg);
-    opacity: 0.7;
-}
-
-.envelope-seal.broken .seal-text {
-    opacity: 0.5;
-    transform: scale(0.8);
-}
-
-/* --- Carta (dentro do envelope) --- */
-.letter {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(80px) scale(0.92);
-    width: 190px;
-    height: 110px;
-    background: linear-gradient(160deg, #fcf8f0, #f0ece0);
-    border-radius: 3px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-    padding: 12px 16px;
-    opacity: 0;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 5;
-    border: 1px solid rgba(180,160,140,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-}
-
-.letter.open {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-30px) scale(1);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.2), 0 0 30px rgba(212,175,55,0.08);
-}
-
-.letter .letter-content {
-    font-family: 'Lora', serif;
-    font-size: 11px;
-    color: #3d2c1a;
-    line-height: 1.5;
-    text-align: center;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    max-height: 100%;
-    font-style: italic;
-}
-
-/* --- Partículas Douradas --- */
-.particle {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-    box-shadow: 0 0 12px rgba(212,175,55,0.4);
-    animation: particleRise 1.8s ease-out forwards;
-}
-
-@keyframes particleRise {
-    0% { 
-        opacity: 0; 
-        transform: translate(0, 0) scale(0.3) rotate(0deg);
-    }
-    30% { 
-        opacity: 1; 
-        transform: translate(var(--tx), calc(var(--ty) * 0.5)) scale(1.2) rotate(45deg);
-    }
-    100% { 
-        opacity: 0; 
-        transform: translate(calc(var(--tx) * 1.8), calc(var(--ty) * 1.8)) scale(0.2) rotate(90deg);
-    }
-}
-
-/* ============================================
-   RESPONSIVIDADE
-   ============================================ */
-@media (max-width: 480px) {
-    .envelope {
-        width: 180px;
-        height: 125px;
-    }
-    .envelope-seal {
-        width: 44px;
-        height: 44px;
-    }
-    .envelope-seal .seal-text {
-        font-size: 18px;
-    }
-    .letter {
-        width: 155px;
-        height: 90px;
-        padding: 10px 14px;
-    }
-    .letter .letter-content {
-        font-size: 10px;
-        -webkit-line-clamp: 4;
-    }
-}
-
-/* ============================================
-   OVERRIDES PARA O ESTADO "ABERTO"
-   ============================================ */
-#oraculo-container .hidden {
-    display: none !important;
-}
-
-#envelope-estado {
-    transition: opacity 0.4s ease;
-}
     </style>
 </head>
 <body class="bg-kokarteBg text-kokarteText font-body min-h-screen pb-12 overflow-x-hidden relative">
@@ -433,33 +458,28 @@
     <!-- Conteúdo principal -->
     <div class="relative z-10">
 
-        <!-- ==========================================
-        HEADER
-        ========================================== -->
+        <!-- HEADER -->
         <header class="text-center pt-6 pb-0 overflow-hidden relative">
-            
-            <!-- Logótipo -->
+
             <div class="flex justify-center mb-3 px-4" data-aos="zoom-in" data-aos-duration="1000">
                 <img src="logo.jpeg" alt="Logótipo Kokarte" class="logo-premium-anim h-28 sm:h-36 w-auto object-contain">
             </div>
 
-            <!-- Redes Sociais -->
             <div class="flex justify-center items-center gap-3.5 my-3 px-4" data-aos="fade-down" data-aos-delay="150">
-                <a href="https://www.instagram.com/kok.arte/" target="_blank" rel="noopener noreferrer" title="Instagram" 
+                <a href="https://www.instagram.com/kok.arte/" target="_blank" rel="noopener noreferrer" title="Instagram"
                    class="w-10 h-10 rounded-full bg-kokarteCard/80 border border-kokarteGold/30 flex items-center justify-center text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-kokarteGold/20">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </a>
-                <a href="https://www.facebook.com/kok.arte.ao" target="_blank" rel="noopener noreferrer" title="Facebook" 
+                <a href="https://www.facebook.com/kok.arte.ao" target="_blank" rel="noopener noreferrer" title="Facebook"
                    class="w-10 h-10 rounded-full bg-kokarteCard/80 border border-kokarteGold/30 flex items-center justify-center text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-kokarteGold/20">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 </a>
-                <a href="https://wa.me/244936676628" target="_blank" rel="noopener noreferrer" title="WhatsApp" 
+                <a href="https://wa.me/244936676628" target="_blank" rel="noopener noreferrer" title="WhatsApp"
                    class="w-10 h-10 rounded-full bg-kokarteCard/80 border border-kokarteGold/30 flex items-center justify-center text-kokarteGold hover:bg-kokarteGold hover:text-kokarteBg transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-kokarteGold/20">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20.52 3.48A11.78 11.78 0 0012.04 0C5.42 0 .04 5.37.04 12c0 2.12.56 4.19 1.62 6.02L0 24l6.16-1.61A11.95 11.95 0 0012.04 24C18.66 24 24 18.63 24 12a11.86 11.86 0 00-3.48-8.52zM12.04 21.8c-1.84 0-3.64-.49-5.22-1.42l-.37-.22-3.66.96.98-3.57-.24-.37A9.74 9.74 0 012.3 12c0-5.37 4.37-9.74 9.74-9.74 2.6 0 5.04 1.01 6.88 2.85A9.66 9.66 0 0121.78 12c0 5.37-4.37 9.8-9.74 9.8zm5.34-7.33c-.29-.14-1.72-.85-1.99-.94-.27-.1-.47-.14-.66.14-.19.28-.75.94-.91 1.13-.17.19-.34.21-.63.07-.29-.14-1.22-.45-2.32-1.44-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.66-1.59-.91-2.18-.24-.58-.49-.5-.66-.5h-.57c-.19 0-.5.07-.76.36-.26.29-.99.97-.99 2.37 0 1.39 1.01 2.73 1.15 2.92.14.19 1.98 3.02 4.8 4.24.67.29 1.2.46 1.61.59.68.22 1.29.19 1.77.12.54-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.08-.12-.27-.19-.56-.33z"/></svg>
                 </a>
             </div>
 
-            <!-- Subtítulo -->
             <div class="max-w-xl mx-auto space-y-1.5 px-4 mb-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 <p class="text-sm sm:text-base font-medium text-kokarteGold font-display tracking-wide leading-snug">
                     Bem-vindo à KOKARTE
@@ -469,104 +489,78 @@
                 </p>
             </div>
 
-            <!-- Linha Dourada Animada -->
             <div class="gold-header-line cursor-pointer mt-4" data-aos="fade-up"></div>
         </header>
 
-        <!-- ==========================================
-        MAIN
-        ========================================== -->
+        <!-- MAIN -->
         <main class="max-w-md mx-auto px-4 space-y-6 mt-6">
 
             <!-- ============================
-SECÇÃO 1: ORÁCULO — CARTA KOKARTE
-============================ -->
-<section class="glass-premium rounded-2xl p-6 text-center relative overflow-hidden" data-aos="fade-up" data-aos-duration="900">
-    
-    <!-- Elementos decorativos -->
-    <div class="absolute -top-12 -right-12 w-32 h-32 bg-kokarteGold/5 rounded-full blur-2xl pointer-events-none"></div>
-    <div class="absolute -bottom-12 -left-12 w-24 h-24 bg-kokarteGold/5 rounded-full blur-2xl pointer-events-none"></div>
+            SECÇÃO 1: ORÁCULO — CARTA KOKARTE
+            ============================ -->
+            <section class="glass-premium rounded-2xl p-6 text-center relative overflow-hidden" data-aos="fade-up" data-aos-duration="900">
 
-    <!-- CONTAINER DO ORÁCULO -->
-    <div id="oraculo-container">
-        
-        <!-- ==========================================
-        ESTADO 1: ENVELOPE FECHADO
-        ========================================== -->
-        <div id="envelope-estado" class="relative flex flex-col items-center justify-center py-4">
-            
-            <!-- Envelope -->
-            <div class="envelope" id="envelope">
-                <!-- Aba do envelope -->
-                <div class="envelope-flap" id="envelope-flap"></div>
-                
-                <!-- Corpo do envelope -->
-                <div class="envelope-body"></div>
-                
-                <!-- Selo com logótipo KOKARTE -->
-                <div class="envelope-seal" id="envelope-seal" onclick="abrirCarta()">
-                    <span class="seal-text">K</span>
-                </div>
-                
-                <!-- Carta (escondida dentro) -->
-                <div class="letter" id="carta">
-                    <div class="letter-content" id="carta-conteudo">
-                        "A carregar..."
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-kokarteGold/5 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-12 -left-12 w-24 h-24 bg-kokarteGold/5 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div id="oraculo-container">
+
+                    <!-- ESTADO 1: ENVELOPE FECHADO -->
+                    <div id="envelope-estado" class="relative flex flex-col items-center justify-center py-4">
+
+                        <div class="envelope" id="envelope">
+                            <div class="envelope-flap" id="envelope-flap"></div>
+                            <div class="envelope-body"></div>
+                            <div class="envelope-seal" id="envelope-seal" onclick="abrirCarta()">
+                                <span class="seal-text">K</span>
+                            </div>
+                            <div class="letter" id="carta">
+                                <div class="letter-content" id="carta-conteudo">"A carregar..."</div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs sm:text-sm text-emerald-200/70 font-sans tracking-wider mt-6 transition-opacity duration-500" id="envelope-legenda">
+                            ✦ UMA MENSAGEM PARA TI ✦
+                        </p>
+                        <p class="text-[10px] text-emerald-200/40 font-sans tracking-[0.2em] mt-1 transition-opacity duration-500" id="envelope-sublegenda">
+                            Respira fundo. Clica no selo para abrir. 
+                        </p>
+
+                        <div id="particulas-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
                     </div>
+
+                    <!-- ESTADO 2: CARTA ABERTA -->
+                    <div id="cartao-estado" class="hidden">
+                        <span class="text-xs sm:text-sm uppercase tracking-[0.25em] text-kokarteGold font-bold font-sans">
+                            UMA MENSAGEM PARA TI
+                        </span>
+                        <div class="divider-gold my-3"></div>
+
+                        <p id="oraculo-texto" class="text-base sm:text-lg my-4 italic font-light leading-relaxed text-emerald-50 font-display transition-opacity duration-500">
+                            "A carregar a tua mensagem especial..."
+                        </p>
+
+                        <div class="divider-gold-dotted my-4"></div>
+
+                        <div class="flex flex-col gap-3 mt-4">
+
+                            <button id="btn-partilhar" onclick="partilharMensagem()" class="btn-gold-primary">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                                Guardar / Partilhar
+                            </button>
+
+                            <button onclick="tirarNovaMensagem()" class="btn-gold-secondary1">
+                                 Receber Nova Mensagem
+                            </button>
+
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            
-            <!-- Texto abaixo do envelope -->
-            <p class="text-xs sm:text-sm text-emerald-200/70 font-sans tracking-wider mt-6 transition-opacity duration-500" id="envelope-legenda">
-                ✦ Uma mensagem espera por si ✦
-            </p>
-            <p class="text-[10px] text-emerald-200/40 font-sans tracking-[0.2em] mt-1 transition-opacity duration-500" id="envelope-sublegenda">
-                Toque no selo para abrir
-            </p>
-            
-            <!-- Container para partículas -->
-            <div id="particulas-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
-        </div>
-        
-        <!-- ==========================================
-        ESTADO 2: CARTA ABERTA (MENSAGEM REVELADA)
-        ========================================== -->
-        <div id="cartao-estado" class="hidden">
-            <span class="text-xs sm:text-sm uppercase tracking-[0.25em] text-kokarteGold font-bold font-sans">UMA MENSAGEM PARA SI</span>
-            <div class="divider-gold my-3"></div>
-            
-            <p id="oraculo-texto" class="text-base sm:text-lg my-4 italic font-light leading-relaxed text-emerald-50 font-body transition-opacity duration-500">
-                "A carregar a tua mensagem especial..."
-            </p>
-            
-            <div class="divider-gold-dotted my-4"></div>
-            
-            <!-- ==========================================
-            BOTÕES — NOVA ORDEM: Partilhar primeiro, Nova Mensagem depois
-            ========================================== -->
-            <div class="flex flex-col gap-3 mt-4">
-                
-                <!-- BOTÃO 1: Guardar / Partilhar (agora em primeiro) -->
-                <button id="btn-partilhar" onclick="partilharMensagem()" 
-                        class="btn-gold-secondary text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-                    </svg>
-                    Guardar / Partilhar
-                </button>
-                
-                <!-- BOTÃO 2: Receber Nova Mensagem (agora em segundo) -->
-                <button onclick="tirarNovaMensagem()" 
-                        class="btn-gold-primary text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-full">
-                    ✨ Receber Nova Mensagem
-                </button>
-                
-            </div>
-        </div>
-        
-    </div>
-    
-</section>
+
+            </section>
 
             <!-- ============================
             SECÇÃO 2: ENERGIA DO MÊS
@@ -576,12 +570,10 @@ SECÇÃO 1: ORÁCULO — CARTA KOKARTE
                     <span class="text-xs sm:text-sm text-kokarteGold uppercase tracking-[0.2em] font-bold font-sans">Energia do Mês</span>
                     <h2 id="energia-mes-titulo" class="text-lg sm:text-xl font-bold text-white font-display mt-1">---</h2>
                 </div>
-                
                 <div class="space-y-2.5 text-sm sm:text-base text-emerald-100/90 font-body leading-relaxed">
                     <p>💎 <strong class="text-kokarteGold font-sans">Cristal Guia:</strong> <span id="energia-cristal" class="text-kokarteGold font-semibold">---</span></p>
                     <p>✨ <strong class="text-kokarteGold font-sans">Benefícios:</strong> <span id="energia-beneficios">---</span></p>
                     <p>⚠️ <strong class="text-kokarteGold font-sans">Cuidados & Atenção:</strong> <span id="energia-cuidados">---</span></p>
-                    
                     <div class="bg-kokarteBg/70 p-3.5 rounded-xl border-l-2 border-kokarteGold mt-4">
                         <p class="text-xs sm:text-sm italic text-emerald-200 font-body">" <span id="energia-afirmacao">---</span> "</p>
                     </div>
@@ -594,24 +586,17 @@ SECÇÃO 1: ORÁCULO — CARTA KOKARTE
             <section class="glass-premium rounded-2xl p-6 shadow-xl relative overflow-hidden" data-aos="fade-up" data-aos-duration="1000">
                 <div class="absolute -right-16 -bottom-16 w-40 h-40 bg-kokarteGold/8 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="absolute -left-16 -top-16 w-32 h-32 bg-kokarteGold/5 rounded-full blur-3xl pointer-events-none"></div>
-
                 <div class="text-center space-y-3 relative z-10">
                     <span class="text-[10px] uppercase tracking-[0.25em] bg-kokarteGold/15 text-kokarteGold border border-kokarteGold/30 font-bold px-3.5 py-1.5 rounded-full inline-block font-sans">
                         🛍️ LOJA ONLINE
                     </span>
-                    
-                    <h2 class="text-xl font-bold text-white font-display tracking-wide">
-                        Explore o nosso catálogo
-                    </h2>
-                    
+                    <h2 class="text-xl font-bold text-white font-display tracking-wide">Explore o nosso catálogo</h2>
                     <p class="text-xs sm:text-sm text-emerald-100/85 font-body leading-relaxed max-w-sm mx-auto">
                         Encontre cristais, incensos, velas, aromas, acessórios e muito mais, tudo num só lugar.
                     </p>
-
                     <div class="divider-gold my-3"></div>
-
-                    <a href="https://kokarte.kyte.site/" target="_blank" rel="noopener noreferrer" 
-                       class="btn-gold-primary inline-flex items-center justify-center gap-2 text-xs sm:text-sm uppercase tracking-wider px-8 py-3.5 rounded-full">
+                    <a href="https://kokarte.kyte.site/" target="_blank" rel="noopener noreferrer"
+                       class="btn-gold-primary inline-flex w-full sm:w-auto">
                         <span>✨ Ver Produtos</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -621,18 +606,18 @@ SECÇÃO 1: ORÁCULO — CARTA KOKARTE
             </section>
 
             <!-- ============================
-SECÇÃO 4: SERVIÇOS (DINÂMICA)
-============================ -->
-<section class="space-y-4">
-    <h2 class="text-center text-xs sm:text-sm uppercase tracking-[0.25em] text-kokarteGold font-bold font-sans" data-aos="fade-up">Os Nossos Serviços</h2>
-    <div class="divider-gold"></div>
-    <div id="lista-servicos-index" class="space-y-3.5">
-        <!-- Carregado dinamicamente pelo JavaScript -->
-        <div class="text-center p-8">
-            <p class="text-emerald-200/50 text-sm animate-pulse">A carregar serviços...</p>
-        </div>
-    </div>
-</section>
+            SECÇÃO 4: SERVIÇOS (DINÂMICA)
+            ============================ -->
+            <section class="space-y-4">
+                <h2 class="text-center text-xs sm:text-sm uppercase tracking-[0.25em] text-kokarteGold font-bold font-sans" data-aos="fade-up">Os Nossos Serviços</h2>
+                <div class="divider-gold"></div>
+                <div id="lista-servicos-index" class="space-y-3.5">
+                    <div class="text-center p-8">
+                        <p class="text-emerald-200/50 text-sm animate-pulse">A carregar serviços...</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- ============================
             SECÇÃO 5: EVENTOS
             ============================ -->
@@ -640,18 +625,16 @@ SECÇÃO 4: SERVIÇOS (DINÂMICA)
                 <h2 class="text-center text-xs sm:text-sm uppercase tracking-[0.25em] text-kokarteGold font-bold font-sans">Próximos Eventos & Workshops</h2>
                 <div class="divider-gold"></div>
                 <div id="lista-eventos" class="space-y-3.5">
-                    <!-- Gerado dinamicamente pelo admin.js -->
+                    <!-- Gerado dinamicamente -->
                 </div>
             </section>
 
         </main>
 
-        <!-- ==========================================
-        RODAPÉ
-        ========================================== -->
+        <!-- RODAPÉ -->
         <footer class="text-center text-xs sm:text-sm text-emerald-200/70 mt-14 mb-4 space-y-4" data-aos="fade-up">
             <div>
-                <a href="admin.html" class="inline-flex items-center gap-2 bg-kokarteCard/80 hover:bg-kokarteCard/60 border border-kokarteGold/30 text-kokarteGold hover:text-kokarteGoldHover font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full transition-all duration-300 shadow-md hover:border-kokarteGold/70 hover:scale-105">
+                <a href="admin.html" class="btn-tertiary">
                     <span>⚙️</span> Painel Administrativo
                 </a>
             </div>
@@ -661,17 +644,13 @@ SECÇÃO 4: SERVIÇOS (DINÂMICA)
     </div>
 
     <!-- ==========================================
-    CARTÃO PARA PARTILHA (off-screen)
+    CARTÃO PARA PARTILHA (off-screen) — APENAS FRASE
     ========================================== -->
     <div id="cartao-partilha-container" style="position: fixed; left: -9999px; top: -9999px; pointer-events: none;">
         <div id="cartao-partilha" style="background-image: url('fundo.jpeg'); background-size: cover; background-position: center; width: 1080px; height: 1920px;" class="flex flex-col items-center justify-center text-center p-20 relative">
-            <div class="absolute inset-0 bg-black/25"></div>
+            <div class="absolute inset-0 bg-black/30"></div>
             <div class="relative z-10 w-full max-w-4xl flex flex-col items-center justify-center">
-                <h3 class="text-[#D4AF37] font-bold tracking-[0.3em] text-5xl mb-24 uppercase drop-shadow-lg font-display"></h3>
-                <div class="w-24 h-0.5 bg-[#D4AF37]/50 mb-16 rounded-full"></div>
-                <p id="texto-partilha" class="text-white text-[5rem] font-light italic leading-tight drop-shadow-xl mb-24 font-body">"A carregar..."</p>
-                <div class="w-32 h-0.5 bg-[#D4AF37]/50 mb-12 rounded-full"></div>
-                <p class="text-[#D4AF37] text-3xl tracking-[0.4em] uppercase font-semibold font-sans"></p>
+                <p id="texto-partilha" class="text-white text-[5.5rem] font-light italic leading-tight drop-shadow-2xl font-body max-w-[90%]">"A carregar..."</p>
             </div>
         </div>
     </div>

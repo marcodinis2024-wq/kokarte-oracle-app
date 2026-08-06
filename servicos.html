@@ -54,21 +54,34 @@
         }
 
         /* ============================================
-           BOTÕES PREMIUM
+           BOTÕES — ESTILOS UNIFICADOS (iguais ao index)
         ============================================ */
         .btn-gold-primary {
             background: linear-gradient(145deg, #D4AF37, #B8952E);
             color: #0f2017;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: none;
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.35), 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-gold-primary:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.45), 0 4px 16px rgba(0, 0, 0, 0.3);
             filter: brightness(1.08);
         }
+        .btn-gold-primary:active { transform: scale(0.97); }
 
         /* ============================================
            VÍDEO DE FUNDO
@@ -304,8 +317,9 @@
                         <button onclick="toggleText(this, 'desc-${s.id}')" class="text-kokarteGold text-xs font-bold font-sans tracking-wider underline mb-4 hover:text-kokarteGoldLight transition-colors">
                             Ver mais
                         </button>
+                        <!-- Botão agora com rounded-full e Montserrat garantido -->
                         <button onclick="agendarWhatsApp('${s.titulo}')" 
-                                class="btn-gold-primary w-full py-3.5 rounded-xl text-sm uppercase tracking-wider">
+                                class="btn-gold-primary">
                             Agendar / Saber Mais
                         </button>
                     </div>

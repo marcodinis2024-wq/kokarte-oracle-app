@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOKARTE — Painel de Administração</title>
-    
+
     <!-- Google Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,9 +63,7 @@
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             border: 1px solid rgba(212, 175, 55, 0.15);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-premium:hover {
@@ -87,48 +85,136 @@
         }
 
         /* ============================================
-           BOTÕES PREMIUM
+           BOTÕES — ESTILOS UNIFICADOS (iguais aos outros ficheiros)
         ============================================ */
         .btn-gold-primary {
             background: linear-gradient(145deg, #D4AF37, #B8952E);
             color: #12241A;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: none;
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.35), 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-gold-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.45), 0 4px 16px rgba(0, 0, 0, 0.3);
             filter: brightness(1.08);
         }
+        .btn-gold-primary:active { transform: scale(0.97); }
 
         .btn-gold-secondary {
             background: transparent;
             color: #D4AF37;
-            border: 2px solid #D4AF37;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid #D4AF37;
+            border-radius: 9999px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
         }
         .btn-gold-secondary:hover {
             background: #D4AF37;
             color: #12241A;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
         }
+        .btn-gold-secondary:active { transform: scale(0.97); }
 
         .btn-danger {
             background: transparent;
             color: #ef4444;
-            border: 2px solid #ef4444;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 2px solid #ef4444;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            cursor: pointer;
         }
         .btn-danger:hover {
             background: #ef4444;
             color: #12241A;
             transform: translateY(-2px);
             box-shadow: 0 8px 32px rgba(239, 68, 68, 0.25);
+        }
+
+        /* Botões pequenos para ações nas listas (Editar, Ocultar, Apagar) */
+        .btn-sm {
+            font-size: 0.6rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .btn-sm-gold {
+            background: transparent;
+            color: #D4AF37;
+            border-color: #D4AF37;
+        }
+        .btn-sm-gold:hover {
+            background: #D4AF37;
+            color: #12241A;
+        }
+        .btn-sm-amber {
+            background: rgba(212, 175, 55, 0.15);
+            color: #D4AF37;
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        .btn-sm-amber:hover {
+            background: rgba(212, 175, 55, 0.3);
+        }
+        .btn-sm-red {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .btn-sm-red:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+        .btn-sm-green {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.3);
+        }
+        .btn-sm-green:hover {
+            background: rgba(52, 211, 153, 0.3);
         }
 
         /* ============================================
@@ -209,6 +295,20 @@
             background: #1a3a2a;
             color: #E2ECE6;
         }
+
+        /* ============================================
+           RESPONSIVIDADE
+        ============================================ */
+        @media (max-width: 640px) {
+            .btn-gold-primary, .btn-gold-secondary {
+                padding: 0.65rem 1rem;
+                font-size: 0.7rem;
+            }
+            .btn-sm {
+                font-size: 0.55rem;
+                padding: 0.25rem 0.6rem;
+            }
+        }
     </style>
 </head>
 <body class="text-kokarteText font-body min-h-screen p-4 md:p-8">
@@ -239,7 +339,7 @@
             <div id="bloqueio-mensagem" class="text-xs text-red-400/70 text-center hidden">
                 ⚠️ Acesso bloqueado. Aguarde 15 minutos.
             </div>
-            <button type="submit" class="btn-gold-primary w-full py-3.5 rounded-lg text-sm uppercase tracking-wider">
+            <button type="submit" class="btn-gold-primary">
                 Entrar no Painel
             </button>
         </form>
@@ -254,7 +354,7 @@
     PAINEL ADMINISTRATIVO
     ========================================== -->
     <div id="painel-admin" class="max-w-4xl mx-auto space-y-8 hidden">
-        
+
         <!-- Topo -->
         <header class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-kokarteGold/20 pb-4 fade-in">
             <div>
@@ -262,10 +362,10 @@
                 <p class="text-xs text-emerald-200/60 font-sans tracking-wider">Gere eventos, serviços e energias do portal</p>
             </div>
             <div class="flex gap-3">
-                <a href="index.html" class="btn-gold-secondary text-xs font-semibold px-4 py-2 rounded-lg">
+                <a href="index.html" class="btn-gold-secondary text-xs font-semibold px-4 py-2" style="width: auto;">
                     Ver Site
                 </a>
-                <button onclick="fazerLogout()" class="btn-danger text-xs font-semibold px-4 py-2 rounded-lg">
+                <button onclick="fazerLogout()" class="btn-danger text-xs font-semibold px-4 py-2">
                     Sair
                 </button>
             </div>
@@ -292,16 +392,16 @@
         TAB: EVENTOS
         ========================================== -->
         <div id="tab-eventos" class="tab-content active space-y-6">
-            
+
             <!-- Formulário Eventos -->
             <section class="glass-premium p-6 rounded-2xl">
                 <h2 id="form-titulo-evento" class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans mb-4">
                     ✨ Adicionar Novo Evento
                 </h2>
-                
+
                 <form id="form-evento" onsubmit="guardarEvento(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="hidden" id="evento-id">
-                    
+
                     <div class="md:col-span-2">
                         <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Título do Evento / Workshop</label>
                         <input type="text" id="evento-titulo" required placeholder="Ex: Workshop de Cristais de Proteção" 
@@ -350,11 +450,11 @@
                     </div>
 
                     <div class="md:col-span-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
-                        <button type="submit" class="btn-gold-primary flex-1 py-3 rounded-lg text-xs uppercase tracking-wider">
+                        <button type="submit" class="btn-gold-primary flex-1">
                             Guardar Evento
                         </button>
                         <button type="button" onclick="limparFormularioEvento()" 
-                                class="btn-gold-secondary px-6 py-3 rounded-lg text-xs uppercase tracking-wider">
+                                class="btn-gold-secondary flex-1">
                             Cancelar
                         </button>
                     </div>
@@ -375,16 +475,16 @@
         TAB: SERVIÇOS
         ========================================== -->
         <div id="tab-servicos" class="tab-content space-y-6">
-            
+
             <!-- Formulário Serviços -->
             <section class="glass-premium p-6 rounded-2xl">
                 <h2 id="form-titulo-servico" class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans mb-4">
                     ✨ Adicionar Novo Serviço
                 </h2>
-                
+
                 <form id="form-servico" onsubmit="guardarServico(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="hidden" id="servico-id">
-                    
+
                     <div class="md:col-span-2">
                         <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Título do Serviço</label>
                         <input type="text" id="servico-titulo" required placeholder="Ex: Consulta de Mapeamento Energético" 
@@ -437,11 +537,11 @@
                     </div>
 
                     <div class="md:col-span-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
-                        <button type="submit" class="btn-gold-primary flex-1 py-3 rounded-lg text-xs uppercase tracking-wider">
+                        <button type="submit" class="btn-gold-primary flex-1">
                             Guardar Serviço
                         </button>
                         <button type="button" onclick="limparFormularioServico()" 
-                                class="btn-gold-secondary px-6 py-3 rounded-lg text-xs uppercase tracking-wider">
+                                class="btn-gold-secondary flex-1">
                             Cancelar
                         </button>
                     </div>
@@ -462,7 +562,7 @@
         TAB: ENERGIA DO MÊS
         ========================================== -->
         <div id="tab-energia" class="tab-content space-y-6">
-            
+
             <!-- Seletor de Ano -->
             <section class="glass-premium p-6 rounded-2xl">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -485,10 +585,10 @@
                 <h2 id="form-titulo-energia" class="text-sm font-bold uppercase tracking-wider text-kokarteGold font-sans mb-4">
                     ✏️ Editar Energia do Mês
                 </h2>
-                
+
                 <form id="form-energia" onsubmit="guardarEnergia(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="hidden" id="energia-id">
-                    
+
                     <div class="md:col-span-2">
                         <label class="block text-xs text-emerald-200/70 font-sans tracking-wider mb-1.5">Mês</label>
                         <select id="energia-mes-select" required class="w-full glass-input rounded-lg p-2.5 text-sm text-white">
@@ -543,11 +643,11 @@
                     </div>
 
                     <div class="md:col-span-2 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
-                        <button type="submit" class="btn-gold-primary flex-1 py-3 rounded-lg text-xs uppercase tracking-wider">
+                        <button type="submit" class="btn-gold-primary flex-1">
                             Guardar Energia
                         </button>
                         <button type="button" onclick="limparFormularioEnergia()" 
-                                class="btn-gold-secondary px-6 py-3 rounded-lg text-xs uppercase tracking-wider">
+                                class="btn-gold-secondary flex-1">
                             Cancelar
                         </button>
                     </div>
